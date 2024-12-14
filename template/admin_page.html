@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            background: url("{% static 'assets/images/admin.jpg' %}") no-repeat center fixed;
+            background-size: 100% auto;
+        }
+
+        .navbar {
+            background-color: #0056a3;
+            padding: 10px;
+            height: 50px;
+        }
+
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .navbar ul li {
+            margin: 0 15px;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .navbar ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            max-width: 800px;
+            display: none; /* Hide by default */
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: #0056a3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #0056a3;
+            color: white;
+        }
+
+        .more-details-btn {
+            background-color: #0056a3;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .more-details-btn:hover {
+            background-color: #004080;
+        }
+        #student-search {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+            width: 100%;
+            max-width: 300px; /* Optional: limit width */
+        }
+
+        #student-search:focus {
+            border-color: #0056a3;
+            box-shadow: 0 0 5px rgba(0, 86, 163, 0.2);
+        }
+        #college-search, #district {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+            max-width: 300px;
+        }
+
+        #college-search {
+            width: 100%;
+        }
+
+        #college-search:focus, #district:focus {
+            border-color: #0056a3;
+            box-shadow: 0 0 5px rgba(0, 86, 163, 0.2);
+        }
+
+        #district {
+            max-width: 200px; /* Adjust width if necessary */
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <ul>
+            <li><a href="javascript:void(0)" onclick="showCollegeRegistration()">College Registration</a></li>
+            <li><a href="javascript:void(0)" onclick="showStudentRegistration()">Student Registration</a></li>
+            <li><a href="javascript:void(0)" onclick="showJobFairRegistration()">Job Fair Registration</a></li>
+            <li><a href="javascript:void(0)" onclick="showExamResults()">Job Fair Students Marks</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+
+        <!-- College Registration Section -->
+        <div id="college-registration" class="card">
+            <h2>College Registration</h2>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <input type="search" id="college-search" placeholder="Search by College Name" oninput="filterColleges()">
+                <select id="district" name="district" onchange="filterColleges()">
+                    <option value="">Select District</option>
+                    <option value="Ariyalur">Ariyalur</option>
+                    <option value="Chennai">Chennai</option>
+                    <option value="Coimbatore">Coimbatore</option>
+                    <option value="Cuddalore">Cuddalore</option>
+                    <option value="Dharmapuri">Dharmapuri</option>
+                    <option value="Dindigul">Dindigul</option>
+                    <option value="Erode">Erode</option>
+                    <option value="Kanchipuram">Kanchipuram</option>
+                    <option value="Karur">Karur</option>
+                    <option value="Krishnagiri">Krishnagiri</option>
+                    <option value="Madurai">Madurai</option>
+                    <option value="Nagapattinam">Nagapattinam</option>
+                    <option value="Namakkal">Namakkal</option>
+                    <option value="Perambalur">Perambalur</option>
+                    <option value="Pudukkottai">Pudukkottai</option>
+                    <option value="Ramanathapuram">Ramanathapuram</option>
+                    <option value="Salem">Salem</option>
+                    <option value="Sivaganga">Sivaganga</option>
+                    <option value="Thanjavur">Thanjavur</option>
+                    <option value="Theni">Theni</option>
+                    <option value="Thoothukudi">Thoothukudi</option>
+                    <option value="Tiruchirappalli">Tiruchirappalli</option>
+                    <option value="Tirunelveli">Tirunelveli</option>
+                    <option value="Tiruppur">Tiruppur</option>
+                    <option value="Tiruvallur">Tiruvallur</option>
+                    <option value="Tiruvannamalai">Tiruvannamalai</option>
+                    <option value="Tiruvarur">Tiruvarur</option>
+                    <option value="Vellore">Vellore</option>
+                    <option value="Viluppuram">Viluppuram</option>
+                    <option value="Virudhunagar">Virudhunagar</option>
+                </select>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>College Name</th>
+                        <th>District</th>
+                        <th>College Number</th>
+                        <th>More Details</th>
+                    </tr>
+                </thead>
+                <tbody id="college-table">
+                    {% for college in colleges %}
+                    <tr>
+                        <td>{{ college.college_name }}</td>
+                        <td>{{ college.district }}</td>
+                        <td>{{ college.collegeNumber }}</td>
+                        <td><a href="{% url 'college-detail' college.college_user_id %}">
+                            <button class="more-details-btn">More Details</button></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Student Registration Section -->
+        <div id="student-registration" class="card" style="display: none;">
+            <h2>Student Registration</h2>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <input type="search" id="student-search" placeholder="search by Name" oninput="filterStudents()">
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Full Name</th>
+                        <th>Gender</th>
+                        <th>Email</th>
+                        <th>More Details</th>
+                    </tr>
+                </thead>
+                <tbody id="student-table">
+                    {% for student in students %}
+                    <tr>
+                        <td>{{ student.firstname }}</td>
+                        <td>{{ student.gender }}</td>
+                        <td>{{ student.email }}</td>
+                        <td><a href="{% url 'student-detail' student.id %}">
+                            <button class="more-details-btn">More Details</button></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Job Fair Registration Section -->
+        <div id="jobfair-registration" class="card" style="display: none;">
+            <h2>Job Fair Registration</h2>
+            
+            <!-- Search Input -->
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <input type="search" id="student-search-job" placeholder="Search by Name" oninput="filterStudentsJob()">
+            </div>
+            
+            <!-- Registration Table -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Gender</th>
+                        <th>More Details</th>
+                    </tr>
+                </thead>
+                <tbody id="student-table-job">
+                    {% for jobfair in jobfairs %}
+                    <tr>
+                        <td>{{ jobfair.Registration.name }}</td>
+                        <td>{{ jobfair.email }}</td>
+                        <td>{{ jobfair.gender }}</td>
+                        <td>
+                            <a href="{% url 'jobfair_details' jobfair.id %}" class="more-details-btn">More Details</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Job Fair Students Marks Section -->
+        <div id="exam-results" class="card" style="display: none;">
+            <h2>Job Fair Students Marks</h2>
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                <input type="search" id="exam-results-search" placeholder="Search by Name" oninput="filterExamResults()">
+                <button id="sort-marks-btn" onclick="sortExamResults()">Sort by Marks (Low to High)</button>
+                <button id="pass-btn" onclick="filterByStatus('Pass')">Show Pass</button>
+                <button id="fail-btn" onclick="filterByStatus('Fail')">Show Fail</button>
+                <button id="reset-btn" onclick="resetFilter()">Reset Filter</button>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Marks</th>
+                        <th>Status</th>
+                        <th>More Details</th>
+                    </tr>
+                </thead>
+                <tbody id="exam-results-table">
+                    {% for result in exam_results %}
+                    <tr>
+                        <td>{{ result.Registration.name }}</td>
+                        <td>{{ result.Registration.email }}</td>
+                        <td>{{ result.marks }}</td>
+                        <td class="status">{{ result.status }}</td>
+                        <td><a href="{% url 'exam-result-detail' result.id %}"><button class="more-details-btn">More Details</button></a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script>
+        
+        function showCollegeRegistration() {
+            document.getElementById('college-registration').style.display = 'block';
+            document.getElementById('student-registration').style.display = 'none';
+            document.getElementById('jobfair-registration').style.display = 'none';
+            document.getElementById('exam-results').style.display = 'none';
+        }
+
+        function showStudentRegistration() {
+            document.getElementById('college-registration').style.display = 'none';
+            document.getElementById('student-registration').style.display = 'block';
+            document.getElementById('jobfair-registration').style.display = 'none';
+            document.getElementById('exam-results').style.display = 'none';
+        }
+
+        function showJobFairRegistration() {
+            document.getElementById('college-registration').style.display = 'none';
+            document.getElementById('student-registration').style.display = 'none';
+            document.getElementById('jobfair-registration').style.display = 'block';
+            document.getElementById('exam-results').style.display = 'none';
+        }
+
+        function showExamResults() {
+            document.getElementById('college-registration').style.display = 'none';
+            document.getElementById('student-registration').style.display = 'none';
+            document.getElementById('jobfair-registration').style.display = 'none';
+            document.getElementById('exam-results').style.display = 'block';
+        }
+
+
+
+        function filterColleges() {
+            const searchInput = document.getElementById('college-search').value.toLowerCase();
+            const selectedDistrict = document.getElementById('district').value;
+            const rows = document.querySelectorAll('#college-table tr');
+
+            rows.forEach(row => {
+                const collegeName = row.cells[0].textContent.toLowerCase();
+                const district = row.cells[1].textContent;
+                const matchesName = collegeName.includes(searchInput);
+                const matchesDistrict = !selectedDistrict || district === selectedDistrict;
+
+                if (matchesName && matchesDistrict) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        function filterStudents() {
+            const searchInput = document.getElementById('student-search').value.toLowerCase();
+            const rows = document.querySelectorAll('#student-table tr');
+
+            rows.forEach(row => {
+                const studentName = row.cells[0].textContent.toLowerCase();
+                if (studentName.includes(searchInput)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+        function filterExamResults() {
+            const searchInput = document.getElementById('exam-results-search').value.toLowerCase();
+            const rows = document.querySelectorAll('#exam-results-table tr');
+
+            rows.forEach(row => {
+                const studentName = row.cells[0].textContent.toLowerCase(); // Assuming the first column is the name
+                if (studentName.includes(searchInput)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+        function filterStudentsJob() {
+            const searchInput = document.getElementById('student-search-job').value.toLowerCase(); // Get the search input
+            const rows = document.querySelectorAll('#student-table-job tr'); // Corrected selector to match the <tbody> ID
+
+            // Loop through each row and filter based on the name column
+            rows.forEach(row => {
+                const studentName = row.cells[0].textContent.toLowerCase(); // Get the name column text
+                if (studentName.includes(searchInput)) {
+                    row.style.display = ''; // Show the row if it matches the search
+                } else {
+                    row.style.display = 'none'; // Hide the row if it doesn't match
+                }
+            });
+        }
+
+        let isAscending = true;
+
+        function sortExamResults() {
+            const table = document.getElementById('exam-results-table');
+            const rows = Array.from(table.rows);
+            const sortButton = document.getElementById('sort-marks-btn');
+
+            // Sort rows based on the marks column
+            rows.sort((a, b) => {
+                const marksA = parseInt(a.querySelector('td[data-marks]').getAttribute('data-marks'), 10);
+                const marksB = parseInt(b.querySelector('td[data-marks]').getAttribute('data-marks'), 10);
+                return isAscending ? marksA - marksB : marksB - marksA;
+            });
+
+            // Toggle the sorting order for the next click
+            isAscending = !isAscending;
+            sortButton.textContent = isAscending ? 'Sort by Marks (Low to High)' : 'Sort by Marks (High to Low)';
+
+            // Append the sorted rows back to the table
+            rows.forEach(row => table.appendChild(row));
+        }
+        function filterExamResults() {
+            const searchInput = document.getElementById('exam-results-search').value.toLowerCase();
+            const rows = document.querySelectorAll('#exam-results-table tr');
+
+            rows.forEach(row => {
+                const name = row.cells[0].textContent.toLowerCase();
+                row.style.display = name.includes(searchInput) ? '' : 'none';
+            });
+        }
+
+        // Function to sort rows by marks
+        function sortExamResults() {
+            const table = document.getElementById('exam-results-table');
+            const rows = Array.from(table.rows);
+
+            rows.sort((a, b) => {
+                const marksA = parseInt(a.cells[2].textContent) || 0;
+                const marksB = parseInt(b.cells[2].textContent) || 0;
+                return marksA - marksB;
+            });
+
+            rows.forEach(row => table.appendChild(row));
+        }
+
+        // Function to filter rows by status
+        function filterByStatus(status) {
+            const rows = document.querySelectorAll('#exam-results-table tr');
+
+            rows.forEach(row => {
+                const rowStatus = row.querySelector('.status').textContent.trim();
+                row.style.display = rowStatus === status ? '' : 'none';
+            });
+        }
+
+        // Function to reset all filters
+        function resetFilter() {
+            const rows = document.querySelectorAll('#exam-results-table tr');
+            document.getElementById('exam-results-search').value = '';
+
+            rows.forEach(row => {
+                row.style.display = '';
+            });
+        }
+
+    </script>
+</body>
+</html>

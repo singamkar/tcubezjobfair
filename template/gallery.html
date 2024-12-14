@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Gallery</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+  {% load static %}
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    }
+
+    .gallery .row {
+      margin: 0 -8px;
+    }
+
+    .gallery .col-lg-3,
+    .gallery .col-md-4 {
+      padding: 8px;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      background-color: #fff;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .gallery-item:hover {
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-home {
+      background-color: #007bff;
+      color: white;
+      font-size: 16px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      display: inline-block;
+      margin: 20px 0;
+    }
+
+    .btn-home:hover {
+      background-color: #0056b3;
+      text-decoration: none;
+    }
+
+    .gallery-title {
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Home Button -->
+  <div class="text-center">
+    <a href="{% url 'home' %}" class="btn-home">Home</a>
+  </div>
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="gallery section py-4">
+    <div class="container">
+      <div class="row g-0">
+        <!-- Gallery Item 1 to 25 -->
+        <div class="col-lg-3 col-md-4 gallery-item">
+          <a href="{% static 'assets/images/gallery/1.jpg' %}" class="glightbox" id="img1" data-gallery="images-gallery">
+            <img src="{% static 'assets/images/gallery/1.jpg' %}" alt="Gallery Image 1" class="img-fluid">
+          </a>
+        </div>
+        <div class="col-lg-3 col-md-4 gallery-item">
+          <a href="{% static 'assets/images/gallery/2.jpg' %}" class="glightbox" id="img2" data-gallery="images-gallery">
+            <img src="{% static 'assets/images/gallery/2.jpg' %}" alt="Gallery Image 2" class="img-fluid">
+          </a>
+        </div>
+        <div class="col-lg-3 col-md-4 gallery-item">
+          <a href="{% static 'assets/images/gallery/3.jpg' %}" class="glightbox" id="img3" data-gallery="images-gallery">
+            <img src="{% static 'assets/images/gallery/3.jpg' %}" alt="Gallery Image 3" class="img-fluid">
+          </a>
+        </div>
+        <div class="col-lg-3 col-md-4 gallery-item">
+          <a href="{% static 'assets/images/gallery/4.jpg' %}" class="glightbox" id="img4" data-gallery="images-gallery">
+            <img src="{% static 'assets/images/gallery/4.jpg' %}" alt="Gallery Image 4" class="img-fluid">
+          </a>
+        </div>
+        <div class="col-lg-3 col-md-4 gallery-item">
+          <a href="{% static 'assets/images/gallery/5.jpg' %}" class="glightbox" id="img5" data-gallery="images-gallery">
+            <img src="{% static 'assets/images/gallery/5.jpg' %}" alt="Gallery Image 5" class="img-fluid">
+          </a>
+        </div>
+        <div class="col-lg-3 col-md-4 gallery-item">
+          <a href="{% static 'assets/images/gallery/6.jpg' %}" class="glightbox" id="img6" data-gallery="images-gallery">
+            <img src="{% static 'assets/images/gallery/6.jpg' %}" alt="Gallery Image 6" class="img-fluid">
+          </a>
+        </div>
+        <div class="col-lg-3 col-md-4 gallery-item">
+          <a href="{% static 'assets/images/gallery/7.jpg' %}" class="glightbox" id="img7" data-gallery="images-gallery">
+            <img src="{% static 'assets/images/gallery/7.jpg' %}" alt="Gallery Image 7" class="img-fluid">
+          </a>
+        </div>
+        <div class="col-lg-3 col-md-4 gallery-item">
+          <a href="{% static 'assets/images/gallery/8.jpg' %}" class="glightbox" id="img8" data-gallery="images-gallery">
+            <img src="{% static 'assets/images/gallery/8.jpg' %}" alt="Gallery Image 8" class="img-fluid">
+          </a>
+        </div>
+        <div class="col-lg-3 col-md-4 gallery-item">
+          <a href="{% static 'assets/images/gallery/9.jpg' %}" class="glightbox" id="img9" data-gallery="images-gallery">
+            <img src="{% static 'assets/images/gallery/9.jpg' %}" alt="Gallery Image 9" class="img-fluid">
+          </a>
+        </div>
+        <div class="col-lg-3 col-md-4 gallery-item">
+          <a href="{% static 'assets/images/gallery/10.jpg' %}" class="glightbox" id="img10" data-gallery="images-gallery">
+            <img src="{% static 'assets/images/gallery/10.jpg' %}" alt="Gallery Image 10" class="img-fluid">
+          </a>
+        </div>
+        <div class="col-lg-3 col-md-4 gallery-item">
+          <a href="{% static 'assets/images/gallery/11.jpg' %}" class="glightbox" id="img11" data-gallery="images-gallery">
+            <img src="{% static 'assets/images/gallery/11.jpg' %}" alt="Gallery Image 11" class="img-fluid">
+          </a>
+        </div>
+        <div class="col-lg-3 col-md-4 gallery-item">
+          <a href="{% static 'assets/images/gallery/12.jpg' %}" class="glightbox" id="img12" data-gallery="images-gallery">
+            <img src="{% static 'assets/images/gallery/12.jpg' %}" alt="Gallery Image 12" class="img-fluid">
+          </a>
+        </div>
+        <div class="col-lg-3 col-md-4 gallery-item">
+          <a href="{% static 'assets/images/gallery/13.jpg' %}" class="glightbox" id="img13" data-gallery="images-gallery">
+            <img src="{% static 'assets/images/gallery/13.jpg' %}" alt="Gallery Image 13" class="img-fluid">
+          </a>
+        </div>
+        <div class="col-lg-3 col-md-4 gallery-item">
+          <a href="{% static 'assets/images/gallery/14.jpg' %}" class="glightbox" id="img14" data-gallery="images-gallery">
+            <img src="{% static 'assets/images/gallery/14.jpg' %}" alt="Gallery Image 14" class="img-fluid">
+          </a>
+        </div>
+        <div class="col-lg-3 col-md-4 gallery-item">
+          <a href="{% static 'assets/images/gallery/15.jpg' %}" class="glightbox" id="img15" data-gallery="images-gallery">
+            <img src="{% static 'assets/images/gallery/15.jpg' %}" alt="Gallery Image 15" class="img-fluid">
+          </a>
+        </div>
+        <div class="col-lg-3 col-md-4 gallery-item">
+          <a href="{% static 'assets/images/gallery/16.jpg' %}" class="glightbox" id="img16" data-gallery="images-gallery">
+            <img src="{% static 'assets/images/gallery/16.jpg' %}" alt="Gallery Image 16" class="img-fluid">
+          </a>
+        </div>
+        <div class="col-lg-3 col-md-4 gallery-item">
+          <a href="{% static 'assets/images/gallery/17.jpg' %}" class="glightbox" id="img17" data-gallery="images-gallery">
+            <img src="{% static 'assets/images/gallery/17.jpg' %}" alt="Gallery Image 17" class="img-fluid">
+          </a>
+        </div>
+        <div class="col-lg-3 col-md-4 gallery-item">
+          <a href="{% static 'assets/images/gallery/18.jpg' %}" class="glightbox" id="img18" data-gallery="images-gallery">
+            <img src="{% static 'assets/images/gallery/18.jpg' %}" alt="Gallery Image 18" class="img-fluid">
+          </a>
+        </div>
+        <div class="col-lg-3 col-md-4 gallery-item">
+          <a href="{% static 'assets/images/gallery/19.jpg' %}" class="glightbox" id="img19" data-gallery="images-gallery">
+            <img src="{% static 'assets/images/gallery/19.jpg' %}" alt="Gallery Image 19" class="img-fluid">
+          </a>
+        </div>
+        <div class="col-lg-3 col-md-4 gallery-item">
+          <a href="{% static 'assets/images/gallery/20.jpg' %}" class="glightbox" id="img20" data-gallery="images-gallery">
+            <img src="{% static 'assets/images/gallery/20.jpg' %}" alt="Gallery Image 20" class="img-fluid">
+          </a>
+        </div>
+        <div class="col-lg-3 col-md-4 gallery-item">
+          <a href="{% static 'assets/images/gallery/21.jpg' %}" class="glightbox" id="img21" data-gallery="images-gallery">
+            <img src="{% static 'assets/images/gallery/21.jpg' %}" alt="Gallery Image 21" class="img-fluid">
+          </a>
+        </div>
+        <div class="col-lg-3 col-md-4 gallery-item">
+          <a href="{% static 'assets/images/gallery/22.jpg' %}" class="glightbox" id="img22" data-gallery="images-gallery">
+            <img src="{% static 'assets/images/gallery/22.jpg' %}" alt="Gallery Image 22" class="img-fluid">
+          </a>
+        </div>
+        <div class="col-lg-3 col-md-4 gallery-item">
+          <a href="{% static 'assets/images/gallery/23.jpg' %}" class="glightbox" id="img23" data-gallery="images-gallery">
+            <img src="{% static 'assets/images/gallery/23.jpg' %}" alt="Gallery Image 23" class="img-fluid">
+          </a>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+  <script>
+    const lightbox = GLightbox({
+      selector: '.glightbox'
+    });
+  </script>
+</body>
+</html>

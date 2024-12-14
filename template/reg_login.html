@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Account</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body{
+            background-image: url("{% static 'assets/images/bg.JPEG' %}");
+            background-size: cover;
+        }
+        label{
+            color: white;
+        }
+        .register-photo {
+            padding: 80px 0;
+            height: 735px;
+            
+        }
+
+        .register-photo .image-holder {
+            display: table-cell;
+            height:150px;
+            background: url("{% static 'assets/images/front.JPEG' %}");
+            background-size: cover;
+            background-position: center;
+        }
+
+        .register-photo .form-container {
+            display: table;
+            max-width: 900px;
+            width: 90%;
+            margin: 0 auto;
+            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .register-photo form {
+            display: table-cell;
+            width: 400px;
+            background-color: #11565c;
+            padding: 40px 60px;
+            color: #505e6c;
+        }
+
+        @media (max-width: 991px) {
+            .register-photo form {
+                padding: 40px;
+            }
+        }
+
+        .register-photo form h2 {
+            font-size: 24px;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+
+        .register-photo form .form-control {
+            background: #f7f9fc;
+            border: none;
+            border-bottom: 1px solid #dfe7f1;
+            border-radius: 0;
+            box-shadow: none;
+            outline: none;
+            color: inherit;
+            text-indent: 6px;
+            height: 40px;
+        }
+
+        .register-photo form .btn-primary {
+            background: #f4476b;
+            border: none;
+            border-radius: 4px;
+            padding: 11px;
+            box-shadow: none;
+            margin-top: 35px;
+            text-shadow: none;
+            outline: none !important;
+        }
+
+        .register-photo form .btn-primary:hover,
+        .register-photo form .btn-primary:active {
+            background: #eb3b60;
+        }
+
+        .register-photo form .btn-primary:active {
+            transform: translateY(1px);
+        }
+
+        .register-photo form .already {
+            display: block;
+            text-align: center;
+            font-size: 12px;
+            color: #6f7a85;
+            opacity: 0.9;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="register-photo">
+        <div class="form-container">
+            <div class="image-holder"></div>
+            {% if messages %}
+                <div class="container mt-3">
+                    {% for message in messages %}
+                        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <form id="loginForm" method="POST">
+                {% csrf_token %}
+                <h2 class="text-center" style="color: white;"><strong>Login</strong> an account.</h2>             
+                <div class="form-group">
+                 <!-- Qualification Dropdown (Arts/Science or Engineering) -->
+                    <label for="qualification">Select Qualification:</label>
+                    <select id="qualification" class="form-control" name="qualification" required onchange="updateLevelOptions()">
+                        <option value="">Select Qualification</option>
+                        <option value="artsscience">Arts and Science</option>
+                        <option value="engineering">Engineering</option>
+                    </select>
+                </div>
+                <!-- UG/PG Selection Dropdown -->
+                <div class="form-group" id="level-group" style="display: none;">
+    
+                    <label for="level">Select Level:</label>
+                    <select id="level" class="form-control" name="level" required onchange="toggleDepartmentDropdown()">
+                        <option value="">Select</option>
+                        <option value="UG">UG</option>
+                        <option value="PG">PG</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="arts-ug-department" style="display: none;">
+                    <label>Select Arts UG Department:</label>
+                    <select class="form-control" name="dept1" required>
+                        <option value="">Select UG Department</option>
+                        <option value="tamil">B.A Tamil</option>
+                        <option value="english">B.A English</option>
+                        <option value="History">B.A. History</option>
+                        <option value="Political Science">B.A. Political Science</option>
+                        <option value="Economics">B.A. Economics</option>
+                        <option value="Journalism and Mass Communication">B.A. Journalism and Mass Communication</option>
+                        <option value="Public Administration">B.A. Public Administration</option>
+                        <option value="Sociology">B.A Sociology</option>
+                        <option value="B.B.A">B.B.A.</option>
+                        <option value="B.Com">B.Com.</option>
+                        <option value="B.Com.(CA)">B.Com.(CA)</option>
+                        <option value="Part-I Language-Tamil">Part-I Language-Tamil</option>
+                        <option value="Part-I Language-Telugu">Part-I Language-Telugu</option>
+                        <option value="Part-II Language-English">Part-II Language-English</option>
+                        <option value="B.Sc. Botany">B.Sc. Botany</option>
+                        <option value="B.Sc. Chemistry">B.Sc. Chemistry</option>
+                        <option value="B.Sc. Computer Science">B.Sc. Computer Science</option>
+                        <option value="B.Sc. Microbiology">B.Sc. Microbiology</option>
+                        <option value="B.Sc. Physics">B.Sc. Physics</option>
+                        <option value="B.Sc. Psychology">B.Sc. Psychology</option>
+                        <option value="B.Sc.Zoology">B.Sc.Zoology</option>
+                        <option value="B.Sc. Mathematics">B.Sc. Mathematics</option>
+                        <option value="B.Sc. Visual Communication">B.Sc. Visual Communication</option>
+                        <option value="B.Sc. (Tourism & Hospitality Management)">B.Sc. (Tourism & Hospitality Management)</option>
+                        <option value="B.Ed.">B.Ed.</option>
+                    </select>
+                </div>
+
+                <!-- Arts PG Department Dropdown -->
+                <div class="form-group" id="arts-pg-department" style="display: none;">
+                    <label>Select Arts PG Department:</label>
+                    <select class="form-control" name="dept2" required>
+                        <option value="">Select PG Department</option>
+                        <option value="M.A tamil">M.A Tamil</option>
+                        <option value="M.A english">M.A English</option>
+                        <option value="M.A. History">M.A. History</option>
+                        <option value="M.A. Political Science">M.A. Political Science</option>
+                        <option value="M.A. Public Administration">M.A. Public Administration</option>
+                        <option value="M.A. Sociology">M.A. Sociology</option>
+                        <option value="M.A. Economics">M.A. Economics</option>
+                        <option value="M.Com.(Group A)">M.Com.(Group A)</option>
+                        <option value="M.Com.(Group B)">M.Com.(Group B)</option>
+                        <option value="M.Com. (Computer Application)">M.Com. (Computer Application)</option>
+                        <option value="M.B.A. (Master of Business Administration)">M.B.A. (Master of Business Administration)</option>
+                        <option value="M.B.A. (Financial Management)">M.B.A. (Financial Management)</option>
+                        <option value="M.B.A. (International Business Management)">M.B.A. (International Business Management)</option>
+                        <option value="M.B.A. (Logistic and Supply chain Management)">M.B.A. (Logistic and Supply chain Management)</option>
+                        <option value="M.B.A. (Human Resource Management)">M.B.A. (Human Resource Management)</option>
+                        <option value="M.B.A. (Marketing Management)">M.B.A. (Marketing Management)</option>
+                        <option value="M.B.A. (Operations and Project Management)">M.B.A. (Operations and Project Management)</option>
+                        <option value="M.B.A. (Retail Management)">M.B.A. (Retail Management)</option>
+                        <option value="M.B.A. (System Management)">M.B.A. (System Management)</option>
+                        <option value="M.B.A. (Airline and Airport Management)">M.B.A. (Airline and Airport Management)</option>
+                        <option value="M.B.A. (Hospital Management)">M.B.A. (Hospital Management)</option>
+                        <option value="M.B.A. (Tourism and Hotel Management)">M.B.A. (Tourism and Hotel Management)</option>
+                        <option value="M.C.A.">M.C.A.</option>
+                        <option value="M.Sc. Mathematics">M.Sc. Mathematics</option>
+                        <option value="M.Sc. Physics">M.Sc. Physics</option>
+                        <option value="M.Sc. Microbiology">M.Sc. Microbiology</option>
+                        <option value="M.Sc. Chemistry">M.Sc. Chemistry</option>
+                        <option value="M.Sc. Botany">M.Sc. Botany</option>
+                        <option value="M.Sc. Zoology">M.Sc. Zoology</option>
+                        <option value="M.Sc. Psychology">M.Sc. Psychology</option>
+                        <option value="M.Sc. Computer science">M.Sc. Computer science</option>
+                        <option value="M.Sc. Electronics & Communication">M.Sc. Electronics & Communication</option>
+                        <option value="M.Sc. Visual & Communication">M.Sc. Visual & Communication</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="engg-ug-department" style="display: none;">
+                    <label>Select Engineering UG Department:</label>
+                    <select class="form-control" name="dept3" required>
+                        <option value="">Select UG Department</option>
+                        <option value="agriculture">B.E Agricultural Engineering</option>
+                        <option value="automobile">B.E Automobile Engineering</option>
+                        <option value="biomedical">B.E Biomedical Engineering</option>
+                        <option value="biotechnology">B.E Biotechnology</option>
+                        <option value="chemical">B.E Chemical Engineering</option>
+                        <option value="civil">B.E Civil Engineering</option>
+                        <option value="CSE">B.E Computer Science and Engineering</option>
+                        <option value="ECE">B.E Electronics and Communication Engineering</option>
+                        <option value="EEE">B.E Electrical and Electronics Engineering</option>
+                        <option value="environmental">B.E Environmental Engineering</option>
+                        <option value="industrial">B.E Industrial Engineering</option>
+                        <option value="information">B.E Information Technology</option>
+                        <option value="instrumentation">B.E Instrumentation and Control Engineering</option>
+                        <option value="marine">B.E Marine Engineering</option>
+                        <option value="mechanical">B.E Mechanical Engineering</option>
+                        <option value="mechatronics">B.E Mechatronics Engineering</option>
+                        <option value="metallurgical">B.E Metallurgical Engineering</option>
+                        <option value="production">B.E Production Engineering</option>
+                        <option value="textile">B.E Textile Engineering</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="engg-pg-department" style="display: none;">
+                    <label>Select Engineering PG Department:</label>
+                    <select class="form-control" name="dept4" required>
+                        <option value="">Select PG Department</option>
+                        <option value="automobile">M.E Automobile Engineering</option>
+                        <option value="biomedical">M.E Biomedical Engineering</option>
+                        <option value="biotechnology">M.E Biotechnology</option>
+                        <option value="chemical">M.E Chemical Engineering</option>
+                        <option value="civil">M.E Civil Engineering</option>
+                        <option value="computer">M.E Computer Science and Engineering</option>
+                        <option value="electronics">M.E Electronics and Communication Engineering</option>
+                        <option value="electrical">M.E Electrical and Electronics Engineering</option>
+                        <option value="environmental">M.E Environmental Engineering</option>
+                        <option value="industrial">M.E Industrial Engineering</option>
+                        <option value="information">M.E Information Technology</option>
+                        <option value="instrumentation">M.E Instrumentation and Control Engineering</option>
+                        <option value="mechanical">M.E Mechanical Engineering</option>
+                        <option value="mechatronics">M.E Mechatronics Engineering</option>
+                        <option value="power">M.E Power Engineering</option>
+                        <option value="structural">M.E Structural Engineering</option>
+                        <option value="telecommunication">M.E Telecommunication Engineering</option>
+                        <option value="textile">M.E Textile Engineering</option>
+                        <option value="thermal">M.E Thermal Engineering</option>
+                        <option value="transportation">M.E Transportation Engineering</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input id="mobile" class="form-control" type="text" name="mobile" placeholder="Mobile Number" required>
+                </div>
+                <div class="form-group">
+                    <input id="email" class="form-control" type="email" name="email"
+                        placeholder="Email" required
+                        pattern="[a-z][a-z0-9._%+-]*@gmail\.com"
+                        title="Email must start with a lowercase letter, contain only lowercase characters, and must end with @gmail.com.">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block" type="submit">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission to handle it via JavaScript
+    
+            // Collect form data
+            var formData = new FormData(this);
+    
+            // Send form data to the server
+            fetch('reg_login', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json()) // Parse the JSON response
+            .then(data => {
+                if (data.success) {
+                    // Show success alert if validation passes
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: 'Your details saved ',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Redirect to the next page after user clicks "OK"
+                            window.location.href = 'payment'; // Replace with your desired redirect URL
+                        }
+                    });
+                } else {
+                    // Display error alert with server response message
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: `There was an error: ${data.message}`,
+                    });
+                }
+            })
+            .catch(error => {
+                // Handle fetch or network error
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: `An unexpected error occurred: ${error.message}`,
+                });
+            });
+        });
+    </script>
+    
+    <script>
+    
+    
+        function updateLevelOptions() {
+            var qualification = document.getElementById("qualification").value;
+            var levelGroup = document.getElementById("level-group");
+    
+            document.getElementById("arts-ug-department").style.display = "none";
+            document.getElementById("arts-pg-department").style.display = "none";
+            document.getElementById("engg-ug-department").style.display = "none";
+            document.getElementById("engg-pg-department").style.display = "none";
+    
+            if (qualification) {
+                levelGroup.style.display = "block";
+            } else {
+                levelGroup.style.display = "none";
+            }
+        }
+    
+        function toggleDepartmentDropdown() {
+            var qualification = document.getElementById("qualification").value;
+            var level = document.getElementById("level").value;
+    
+            var artsUG = document.getElementById("arts-ug-department");
+            var artsPG = document.getElementById("arts-pg-department");
+            var enggUG = document.getElementById("engg-ug-department");
+            var enggPG = document.getElementById("engg-pg-department");
+    
+            artsUG.style.display = "none";
+            artsUG.querySelector("select").required = false;
+            
+            artsPG.style.display = "none";
+            artsPG.querySelector("select").required = false;
+            
+            enggUG.style.display = "none";
+            enggUG.querySelector("select").required = false;
+            
+            enggPG.style.display = "none";
+            enggPG.querySelector("select").required = false;
+    
+            if (qualification === "artsscience" && level === "UG") {
+                artsUG.style.display = "block";
+                artsUG.querySelector("select").required = true;
+            } else if (qualification === "artsscience" && level === "PG") {
+                artsPG.style.display = "block";
+                artsPG.querySelector("select").required = true;
+            } else if (qualification === "engineering" && level === "UG") {
+                enggUG.style.display = "block";
+                enggUG.querySelector("select").required = true;
+            } else if (qualification === "engineering" && level === "PG") {
+                enggPG.style.display = "block";
+                enggPG.querySelector("select").required = true;
+            }
+        }
+    </script>
+    
+</body>
+
+</html>

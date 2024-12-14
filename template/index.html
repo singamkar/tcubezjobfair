@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>THE HR COMPANY</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  {% load static %}
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+<!-- Vendor CSS Files -->
+<link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.min.css' %}" rel="stylesheet">
+<link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+<link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+<link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+<!-- Main CSS File -->
+<link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+<link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
+
+<style>
+  .navmenu ul li {
+      list-style-type: none;
+  }
+  .img-fluid-logo{
+    height: 30px;
+    width: 30px;
+    margin-right: 20px;
+  }
+</style>
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="{% url 'home' %}" class="logo d-flex align-items-center">
+
+        <h1 class="sitename">The HR Company</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul >
+          <li style="text-decoration: none;"><a href="#hero" class="active">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#features">company</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="{% url 'students_corner' %}">Student Registration</a></li>
+          <li><a href="{% url 'college_registration' %}">College Registration</a></li>
+          
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="{% url 'appointment' %}">Appointment</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+    </div>
+  </header>
+
+  <main class="main">
+    <!-- Hero Section -->
+    <section id="hero" class="hero section dark-background">
+      <img src="{% static 'assets/images/hero-bg-2.jpg' %}" alt="" class="hero-bg">
+
+      <div class="container">
+        <div class="row gy-4 justify-content-between">
+          <div class="col-lg-4 order-lg-last hero-img" data-aos="zoom-out" data-aos-delay="100">
+
+            <img src="{% static 'assets/images/image.png' %}" class="img-fluid animated" alt="">
+          </div>
+
+          <div class="col-lg-6  d-flex flex-column justify-content-center" data-aos="fade-in">
+            <h1>Job Fair 2024: Empowering Students for a Bright Future</h1>
+            <p>This event is an opportunity for students to explore career opportunities.</p>
+            <div class="d-flex">
+              <a href="{% url 'reg' %}" class="btn-get-started">To Register</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28 " preserveAspectRatio="none">
+        <defs>
+          <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path>
+        </defs>
+        <g class="wave1">
+          <use xlink:href="#wave-path" x="50" y="3"></use>
+        </g>
+        <g class="wave2">
+          <use xlink:href="#wave-path" x="50" y="0"></use>
+        </g>
+        <g class="wave3">
+          <use xlink:href="#wave-path" x="50" y="9"></use>
+        </g>
+      </svg>
+
+    </section><!-- /Hero Section -->
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row align-items-xl-center gy-5">
+
+          <div class="col-xl-5 content">
+            <h3>About Us</h3>
+            <br>
+            <h2>Empowering Talent, Bridging Opportunities</h2>
+            <br>
+            <p>We specialize in providing innovative human resource solutions to help businesses thrive.<br>
+              With years of experience in the HR industry, we are committed to empowering organizations by sourcing the best talent, streamlining HR processes, and ensuring employee satisfaction.<BR> Our team of experts is dedicated to delivering tailored HR services, including recruitment, employee training, performance management, and compliance solutions.<br>
+              We believe that people are the cornerstone of every successful business.</p>
+              <p>
+              <strong>OUR VISION:</strong>
+              Our vision is to create organizations where people are valued, performance is optimized, and every business thrives. We strive to be at the forefront of HR innovation, offering solutions that are not only effective but also transformative for businesses of all sizes.
+              </p>
+              <p>
+              <strong>OUR MISSION:</strong>
+              Our mission is to provide businesses with the resources, and expertise they need to maximize their workforce potential. By delivering high-quality, innovative HR solutions, we help organizations build teams that are not only capable but also motivated and engaged.</p>
+          </div>
+
+          <div class="col-xl-7">
+            <div class="row gy-4 icon-boxes">
+
+              <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="icon-box">
+                  <i class="bi-people"></i>
+                  <h3>Talent Sourcing</h3>
+                  <p>Attracting and connecting top-tier talent with leading organizations to build skill and growth.
+               Leveraging advanced sourcing techniques to identify the right talent for the right roles.</p>
+                </div>
+              </div> <!-- End Icon Box -->
+
+              <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="icon-box">
+                  <i class="bi-laptop"></i>
+                  <h3>Internship Opportunities</h3>
+                  <p>Empowering students and fresh graduates with real-world experience through meaningful internships.
+                    </p>
+                </div>
+              </div> <!-- End Icon Box -->
+
+              <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
+                <div class="icon-box">
+                  <i class="bi-building"></i>
+                  <h3>Campus Recruitment</h3>
+                  <p>Bridging the gap between education and employment by connecting colleges and students with leading organizations.
+                    </p>
+                </div>
+              </div> <!-- End Icon Box -->
+
+              <div class="col-md-6" data-aos="fade-up" data-aos-delay="500">
+                <div class="icon-box">
+                  <i class="bi-person-check"></i>
+                  <h3>Experience real time hiring</h3>
+                  <p>Step into a world of instant opportunities at our Job Fair. 
+                    Connect directly with recruiters who are ready to hire on the spot. 
+                    </p>
+                </div>
+              </div> <!-- End Icon Box -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section><!-- /About Section -->
+
+    <!-- Features Section -->
+    <!-- Features Section -->
+    <section id="features" class="features section">
+
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="features-item">
+              <img src="{% static 'assets\images\gpay.jpg' %}" class="img-fluid-logo" alt="">
+              <h3><a href="" class="stretched-link">GOOGLE PAY</a></h3>
+            </div>
+          </div><!-- End Feature Item -->
+
+          <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="features-item">
+              <img src="{% static 'assets\images\tata.PNG' %}" class="img-fluid-logo" alt="">
+              <h3><a href="" class="stretched-link">TATA MOTORS</a></h3>
+            </div>
+          </div><!-- End Feature Item -->
+
+          <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="features-item">
+              <img src="{% static 'assets\images\genpact.PNG' %}" class="img-fluid-logo" alt="">
+              <h3><a href="" class="stretched-link">GENPACT</a></h3>
+            </div>
+          </div><!-- End Feature Item -->
+
+          <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="400">
+            <div class="features-item">
+              <img src="{% static 'assets\images\paytm.PNG' %}" class="img-fluid-logo" alt="">
+              <h3><a href="" class="stretched-link">PAYTM</a></h3>
+            </div>
+          </div><!-- End Feature Item -->
+
+          <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="500">
+            <div class="features-item">
+              <img src="{% static 'assets\images\lt.PNG' %}" class="img-fluid-logo" alt="">
+              <h3><a href="" class="stretched-link">LARSEN AND TURBO</a></h3>
+            </div>
+          </div><!-- End Feature Item -->
+
+          <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="600">
+            <div class="features-item">
+              <img src="{% static 'assets\images\icici.PNG' %}" class="img-fluid-logo" alt="">
+              <h3><a href="" class="stretched-link">ICICI BANK</a></h3>
+            </div>
+          </div><!-- End Feature Item -->
+
+          <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="700">
+            <div class="features-item">
+              <img src="{% static 'assets\images\hdfc.JPG' %}" class="img-fluid-logo" alt="">
+              <h3><a href="" class="stretched-link">HDFC BANK</a></h3>
+            </div>
+          </div><!-- End Feature Item -->
+
+          <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="800">
+            <div class="features-item">
+              <img src="{% static 'assets\images\startek.JPG' %}" class="img-fluid-logo" alt="">
+              <h3><a href="" class="stretched-link">STARTTEK</a></h3>
+            </div>
+          </div><!-- End Feature Item -->
+
+          <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="900">
+            <div class="features-item">
+              <img src="{% static 'assets\images\tatastrive.JPG' %}" class="img-fluid-logo" alt="">
+              <h3><a href="" class="stretched-link">TATA STRIVE</a></h3>
+            </div>
+          </div><!-- End Feature Item -->
+
+          <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="1000">
+            <div class="features-item">
+              <img src="{% static 'assets\images\lg.PNG' %}" class="img-fluid-logo" alt="">
+              <h3><a href="" class="stretched-link">LG ELECTRONICS</a></h3>
+            </div>
+          </div><!-- End Feature Item -->
+
+          <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="1100">
+            <div class="features-item">
+              <img src="{% static 'assets\images\bosch.JPG' %}" class="img-fluid-logo" alt="">
+              <h3><a href="" class="stretched-link">BOSCH</a></h3>
+            </div>
+          </div><!-- End Feature Item -->
+
+          <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="1200">
+            <div class="features-item">
+              <img src="{% static 'assets\images\amul.PNG' %}" class="img-fluid-logo" alt="">
+              <h3><a href="" class="stretched-link">AMUL</a></h3>
+            </div>
+          </div><!-- End Feature Item -->
+        </div>
+
+      </div>
+
+    </section><!-- /Features Section -->
+
+    <!-- Stats Section -->
+    <section id="stats" class="stats section light-background">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
+            <i class="bi bi-emoji-smile"></i>
+            <div class="stats-item">
+              <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Happy Clients</p>
+            </div>
+          </div><!-- End Stats Item -->
+
+          <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
+            <i class="bi bi-journal-richtext"></i>
+            <div class="stats-item">
+              <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Projects</p>
+            </div>
+          </div><!-- End Stats Item -->
+
+          <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
+            <i class="bi bi-headset"></i>
+            <div class="stats-item">
+              <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Hours Of Support</p>
+            </div>
+          </div><!-- End Stats Item -->
+
+          <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
+            <i class="bi bi-people"></i>
+            <div class="stats-item">
+              <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Hard Workers</p>
+            </div>
+          </div><!-- End Stats Item -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Stats Section -->
+
+    <!-- Details Section -->
+    <section id="details" class="details section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Details</h2>
+        <div><span>Check Our</span> <span class="description-title">Details</span></div>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+        <div class="row gy-4 align-items-center features-item">
+          <div class="col-md-5 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="100">
+            <img src="{% static 'assets\images\DALLE2~2.jpg' %}" class="img-fluid" alt="">
+          </div>
+          <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
+            <h3>Our Professionalism</h3>
+            <p class="fst-italic">
+                     We bring a wealth of industry expertise and a deep commitment to excellence to every project. 
+                Our team of highly skilled HR professionals is equipped with the knowledge to deliver strategic HR solutions that align with your business goals. 
+                We focus on fostering long-term partnerships with our clients, ensuring that all HR functions, from talent acquisition to employee development, are handled with the utmost professionalism and efficiency. 
+            </p>
+            <h3>Our Enthusiasm</h3>
+            <p class="fst-italic">
+              We approach every challenge with enthusiasm and a passion for making a positive impact.
+              Our team is driven by a shared purpose to create workplaces where employees feel valued, empowered, and engaged.
+              This enthusiasm translates into a collaborative approach, where we work alongside you to develop HR strategies that inspire your workforce and propel your business forward.
+            </p>
+            <h3>Our Innovation</h3>
+            <p class="fst-italic">
+            We are constantly exploring new ways to solve the challenges faced by modern businesses.
+            We embrace cutting-edge HR technologies, data-driven strategies, and forward-thinking methodologies to deliver innovative solutions that streamline your HR processes and enhance overall performance. </p>
+          </div>
+        </div><!-- Features Item -->
+
+        <div class="row gy-4 align-items-center features-item">
+          <div class="col-md-5 order-1 order-md-2 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
+            <img  style="height: 600px;width: 400px;margin-left: 50px;" src="{% static 'assets/images/seondimg.JPG' %}" class="img-fluid" alt="">
+          </div>
+          <div class="col-md-7 order-2 order-md-1" data-aos="fade-up" data-aos-delay="200">
+            <h3>Exceptional Talent Solutions for Your Business</h3>
+            <p class="fst-italic">
+              <ul>
+              <li><i class="bi bi-check"></i> <span class="fst-italic">We provide exceptional talent solutions designed to help your business thrive by connecting you with highly skilled professionals who align with your unique vision.</span></li>
+              <li><i class="bi bi-check"></i> <span class="fst-italic">With our strategic talent acquisition and customized recruitment processes, we ensure that you attract the right people who will drive innovation and enhance organizational performance.</span></li>
+              <li><i class="bi bi-check"></i> <span class="fst-italic">Our advanced development programs empower employees to excel, while our engagement and retention strategies build lasting teams that foster sustained success.</span></li>
+                <li><i class="bi bi-check"></i> <span class="fst-italic">Leveraging cutting-edge technology and industry-leading insights, we offer solutions that enable your business to stay competitive, adaptive, and future-ready.</span></li>
+               </ul>
+            </p>
+          </div>
+        </div><!-- Features Item -->
+
+        <div class="row gy-4 align-items-center features-item">
+          <div class="col-md-5 d-flex align-items-center" data-aos="zoom-out">
+            <img style="height: 600px;width: 400px;" src="{% static 'assets/images/thirdimg.jpg' %}" class="img-fluid" alt="">
+          </div>
+          <div class="col-md-7" data-aos="fade-up">
+            <h3>Why Choose Us?</h3>
+            <p class="fst-italic">Expertise You Can Trust: With years of experience in the HR industry, we bring a deep understanding of talent management, recruitment, and workforce development, ensuring that your business receives the highest level of service and expertise.</p>
+            <ul>
+              <li><i class="bi bi-check"></i> <span class="fst-italic"> Cutting-Edge Technology:By utilizing the latest HR tech and data-driven insights, we streamline your HR processes, improve decision-making, and enhance overall efficiency, keeping your business ahead of the curve.</span></li>
+              <li><i class="bi bi-check"></i><span class="fst-italic">Commitment to Quality:We prioritize excellence in everything we do, delivering results that not only meet but exceed expectations.
+                 From innovative talent acquisition to employee engagement, we are dedicated to driving sustainable success for your organization.</span></li>
+              <li><i class="bi bi-check"></i> <span class="fst-italic">End-to-End Support:Our services extend beyond just recruitment.
+                 We offer comprehensive HR solutions, from hiring and training to retaining and developing employees, ensuring your workforce is equipped to thrive.</span>.</li>
+            </ul>
+          </div>
+        </div><!-- Features Item -->
+
+       
+        </div><!-- Features Item -->
+
+      </div>
+
+    </section><!-- /Details Section -->
+
+    <!-- Gallery Section -->
+  <section id="gallery" class="gallery section">
+    <!-- Section Title -->
+    <div class="container section-title text-center py-4">
+      <h2>Gallery</h2>
+      <div><span>Check Our</span> <span class="description-title">Gallery</span></div>
+    </div><!-- End Section Title -->
+
+    <div class="container">
+      <div class="row g-0">
+        <!-- Display first 8 images -->
+        <!-- Loop to generate images dynamically -->
+        <div class="col-lg-3 col-md-4">
+          <div class="gallery-item">
+            <a href="{% static 'assets/images/gallery/1.jpg' %}" class="glightbox" data-gallery="images-gallery">
+              <img src="{% static 'assets/images/gallery/1.jpg' %}" alt="Gallery Image 1" class="img-fluid">
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4">
+          <div class="gallery-item">
+            <a href="{% static 'assets/images/gallery/2.jpg' %}" class="glightbox" data-gallery="images-gallery">
+              <img src="{% static 'assets/images/gallery/2.jpg' %}" alt="Gallery Image 2" class="img-fluid">
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4">
+          <div class="gallery-item">
+            <a href="{% static 'assets/images/gallery/3.jpg' %}" class="glightbox" data-gallery="images-gallery">
+              <img src="{% static 'assets/images/gallery/3.jpg' %}" alt="Gallery Image 3" class="img-fluid">
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4">
+          <div class="gallery-item">
+            <a href="{% static 'assets/images/gallery/4.jpg' %}" class="glightbox" data-gallery="images-gallery">
+              <img src="{% static 'assets/images/gallery/4.jpg' %}" alt="Gallery Image 4" class="img-fluid">
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4">
+          <div class="gallery-item">
+            <a href="{% static 'assets/images/gallery/5.jpg' %}" class="glightbox" data-gallery="images-gallery">
+              <img src="{% static 'assets/images/gallery/5.jpg' %}" alt="Gallery Image 5" class="img-fluid">
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4">
+          <div class="gallery-item">
+            <a href="{% static 'assets/images/gallery/6.jpg' %}" class="glightbox" data-gallery="images-gallery">
+              <img src="{% static 'assets/images/gallery/6.jpg' %}" alt="Gallery Image 6" class="img-fluid">
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4">
+          <div class="gallery-item">
+            <a href="{% static 'assets/images/gallery/7.jpg' %}" class="glightbox" data-gallery="images-gallery">
+              <img src="{% static 'assets/images/gallery/7.jpg' %}" alt="Gallery Image 7" class="img-fluid">
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4">
+          <div class="gallery-item">
+            <a href="{% static 'assets/images/gallery/8.jpg' %}" class="glightbox" data-gallery="images-gallery">
+              <img src="{% static 'assets/images/gallery/8.jpg' %}" alt="Gallery Image 8" class="img-fluid">
+            </a>
+          </div>
+        </div>
+        <!-- Repeat this block for images 10 to 25 -->
+        <!-- Example for image 25 -->
+      </div>
+
+      <!-- "See More" and "See Less" Buttons -->
+      <div class="text-center mt-4">
+        <a href="{% url 'gallery' %}" class="btn btn-primary">See More</a>
+      </div>
+    </div>
+  </section><!-- /Gallery Section -->
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials section dark-background">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="swiper init-swiper">
+          <script type="application/json" class="swiper-config">
+            {
+              "loop": true,
+              "speed": 600,
+              "autoplay": {
+                "delay": 5000
+              },
+              "slidesPerView": "auto",
+              "pagination": {
+                "el": ".swiper-pagination",
+                "type": "bullets",
+                "clickable": true
+              }
+            }
+          </script>
+          <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <strong>
+                  <i class="bi bi-quote quote-icon-left"></i>
+                  <span>We connect IT brilliance with the right minds,
+                    Empowering your business to reach new heights.</span>
+                  <i class="bi bi-quote quote-icon-right"></i>
+                </strong>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                
+                <p>
+                  <i class="bi bi-quote quote-icon-left"></i>
+                  <span>HR solutions tailored for the IT world,
+                    Fueling innovation with every hire.</span>
+                  <i class="bi bi-quote quote-icon-right"></i>
+                </p>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                
+                <p>
+                  <i class="bi bi-quote quote-icon-left"></i>
+                  <span>From talent to teamwork, we make it happen,
+                    Your IT success is our passion.</span>
+                  <i class="bi bi-quote quote-icon-right"></i>
+                </p>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                
+                <p>
+                  <i class="bi bi-quote quote-icon-left"></i>
+                  <span>Building IT teams that drive success,
+                    Your growth is our ultimate goal.</span>
+                  <i class="bi bi-quote quote-icon-right"></i>
+                </p>
+              </div>
+            </div><!-- End testimonial item -->
+
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+
+    </section><!-- /Testimonials Section -->
+
+    
+
+    <!-- Faq Section -->
+    <section id="faq" class="faq section light-background">
+
+      <div class="container-fluid">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-7 d-flex flex-column justify-content-center order-2 order-lg-1">
+
+            <div class="content px-xl-5" data-aos="fade-up" data-aos-delay="100">
+              <h3><span>Frequently Asked </span><strong>Questions</strong></h3>
+            </div>
+
+            <div class="faq-container px-xl-5" data-aos="fade-up" data-aos-delay="200">
+
+              <div class="faq-item faq-active">
+                <i class="faq-icon bi bi-question-circle"></i>
+                <h3>How can I apply for a job through your platform?
+                </h3>
+                <div class="faq-content">
+                  <p>To apply for a job through a platform, create an account, complete your profile, search for relevant jobs, and submit your application by uploading your resume and following any additional instructions. Track your application status through the platform’s dashboard.</p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div><!-- End Faq item-->
+
+              <div class="faq-item">
+                <i class="faq-icon bi bi-question-circle"></i>
+                <h3>What are the benefits of working with your HR company?
+                </h3>
+                <div class="faq-content">
+                  <p>Working with our HR company provides access to top talent, customized recruitment strategies, and streamlined hiring processes. We offer support in talent acquisition, employee engagement, and retention, helping build a strong, adaptable team for long-term success.</p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div><!-- End Faq item-->
+
+              <div class="faq-item">
+                <i class="faq-icon bi bi-question-circle"></i>
+                <h3>How long does it typically take for companies to respond after the job fair? 
+                </h3>
+                <div class="faq-content">
+                  <p>Response times can vary depending on the company and the number of applicants, but typically, companies take one to two weeks to follow up after the job fair. If you haven’t heard back within that time frame, it’s a good idea to send a polite follow-up email to express your continued interest and ask about the next steps.</p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div><!-- End Faq item-->
+
+              <div class="faq-item">
+                <i class="faq-icon bi bi-question-circle"></i>
+                <h3>Is formal dress compulsory?
+                </h3>
+                <div class="faq-content">
+                  <p>Yes, wearing formal dress is generally recommended for job fairs and campus placements as it presents a professional image to recruiters. Dressing in business attire shows that you are serious and prepared for the opportunity</p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div><!-- End Faq item-->
+
+              <div class="faq-item">
+                <i class="faq-icon bi bi-question-circle"></i>
+                <h3>What are the things to be done on the day before the campus placements?
+                </h3>
+                <div class="faq-content">
+                  <p>The day before campus placements, update and print your resume, research the companies, practice your pitch, ensure your formal dress is ready, get a good night’s rest, plan your route, and prepare questions for recruiters. This will help you feel confident and ready</p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div><!-- End Faq item-->
+
+            </div>
+          </div>
+
+          <div class="col-lg-5 order-1 order-lg-2">
+            <img style="height: 370px;width:500px;" src="{% static 'assets/images/LOGO2 (2).png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="100">
+          </div>
+        </div>
+
+      </div>
+
+    </section><!-- /Faq Section -->
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Contact</h2>
+        <div><span>Check Our</span> <span class="description-title">Contact</span></div>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade" data-aos-delay="100">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4">
+            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
+              <i class="bi bi-geo-alt flex-shrink-0"></i>
+              <div>
+                <h3>Address</h3>
+                <p>217,church W St,Bastin Nagar, Nataraja Nagar,
+                  Bethaniyapuram, Madurai,Tamil Nadu 625016
+                </p>
+              </div>
+            </div><!-- End Info Item -->
+
+            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
+              <i class="bi bi-telephone flex-shrink-0"></i>
+              <div>
+                <h3>Call Us</h3>
+                <p>+91 73589 31478</p>
+              </div>
+            </div><!-- End Info Item -->
+
+            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
+              <i class="bi bi-envelope flex-shrink-0"></i>
+              <div>
+                <h3>Email Us</h3>
+                <p>tcubez.jobfair@gmail.com</p>
+              </div>
+            </div><!-- End Info Item -->
+
+          </div>
+
+          <div class="col-lg-8">
+            <form method="POST">
+              {% csrf_token %}
+              <div class="row gy-4">
+            
+                <div class="col-md-6">
+                  <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                </div>
+            
+                <div class="col-md-6">
+                  <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+                </div>
+            
+                <div class="col-md-12">
+                  <input type="text" class="form-control" name="subject" placeholder="Subject" required>
+                </div>
+            
+                <div class="col-md-12">
+                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
+                </div>
+            
+                <div class="col-md-12 text-center">
+                  <button type="submit" class="btn btn-success btn-lg">Send Message</button>
+                </div>
+            
+              </div>
+            </form>
+            
+          </div><!-- End Contact Form -->
+        </div>
+      </div>
+
+    </section><!-- /Contact Section -->
+
+  </main>
+
+  <footer id="footer" class="footer dark-background">
+
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span class="sitename">THE HR COMPANY</span>
+          </a>
+          <div class="footer-contact pt-3">
+            <p>217,church W St,Bastin Nagar, Nataraja Nagar,</p>
+            <p>Bethaniyapuram, Madurai,Tamil Nadu 625016</p>
+            <p class="mt-3"><strong>Phone:</strong> <span>+91 73589 31478</span></p>
+            <p><strong>Email:</strong> <span>tcubez.jobfair@gmail.com</span></p>
+          </div>
+          <div class="social-links d-flex mt-4">
+            <a href=""><i class="bi bi-twitter-x"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-12 footer-newsletter">
+          <h4>Our Newsletter</h4>
+          <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="container copyright text-center mt-4">
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">THE HR COMPANY</strong> <span>All Rights Reserved</span></p>
+      <div class="credits">
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+
+  <!-- Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+  
+</body>
+
+</html>

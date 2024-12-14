@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #0056a3;
+            margin-bottom: 20px;
+        }
+
+        .details-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .details-section div {
+            width: 48%;
+            margin-bottom: 20px;
+        }
+
+        .details-section div p {
+            margin: 0;
+            color: #333;
+        }
+
+        .details-section div p strong {
+            color: #0056a3;
+        }
+
+        .details-section div:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+
+        .highlight {
+            background-color: #f0f8ff;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        /* Hover animation */
+        .details-section div:hover {
+            background-color: #f0f8ff;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .details-section div {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Student Details for {{ student.firstname }} {{ student.middlename }} {{ student.lastname }}</h1>
+
+        <h2>Basic Information</h2>
+        <div class="details-section">
+            <div><p><strong>Date of Birth:</strong> {{ student.date_of_birth }}</p></div>
+            <div><p><strong>Gender:</strong> {{ student.gender }}</p></div>
+            <div><p><strong>Blood Group:</strong> {{ student.blood_group }}</p></div>
+            <div><p><strong>Email:</strong> {{ student.email }}</p></div>
+            <div><p><strong>Alternate Email:</strong> {{ student.alt_email }}</p></div>
+            <div><p><strong>Mobile:</strong> {{ student.mobile }}</p></div>
+            <div><p><strong>Alternate Mobile:</strong> {{ student.alt_mobile }}</p></div>
+        </div>
+
+        <h2>Permanent Address</h2>
+        <div class="details-section">
+            <div>
+                <p><strong>House No:</strong> {{ student.permanant_house_no }}</p>
+            </div>
+            <div>
+                <p><strong>Street:</strong> {{ student.permanant_street_name }}</p>
+            </div>
+            <div>
+                <p><strong>Landmark:</strong> {{ student.permanant_landmark }}</p>
+            </div>
+            <div>
+                <p><strong>City:</strong> {{ student.permanant_city }}</p>
+            </div>
+            <div>
+                <p><strong>State:</strong> {{ student.permanant_state }}</p>
+            </div>
+            <div>
+                <p><strong>Country:</strong> {{ student.permanant_country }}</p>
+            </div>
+            <div>
+                <p><strong>Pincode:</strong> {{ student.permanant_pincode }}</p>
+            </div>
+        </div>
+
+        <h2>Present Address</h2>
+        <div class="details-section">
+            <div>
+                <p><strong>House No:</strong> {{ student.present_house_no }}</p>
+            </div>
+            <div>
+                <p><strong>Street:</strong> {{ student.present_street_name }}</p>
+            </div>
+            <div>
+                <p><strong>Landmark:</strong> {{ student.present_landmark }}</p>
+            </div>
+            <div>
+                <p><strong>City:</strong> {{ student.present_city }}</p>
+            </div>
+            <div>
+                <p><strong>State:</strong> {{ student.present_state }}</p>
+            </div>
+            <div>
+                <p><strong>Country:</strong> {{ student.present_country }}</p>
+            </div>
+            <div>
+                <p><strong>Pincode:</strong> {{ student.present_pincode }}</p>
+            </div>
+        </div>
+        <h2>Academic Details</h2>
+        {% for academic in academic_details %}
+            {% if academic.high_qualification == 'bachelor-degree' %}
+            <div class="details-section">
+                <div><p><strong>Qualification:</strong> {{ academic.high_qualification }}</p></div>
+            </div>
+            {% else %}
+            <div class="details-section">
+                <div><p><strong>Qualification:</strong> {{ academic.high_qualification }}</p></div>
+                <div><p><strong>Course Name:</strong> {{ academic.course_name }}</p></div>
+                <div><p><strong>Course Duration Start:</strong> {{ academic.course_duration_start }}</p></div>
+                <div><p><strong>Course Duration End:</strong> {{ academic.course_duration_end }}</p></div>
+                <div><p><strong>Course Type:</strong> {{ academic.course_type }}</p></div>
+                <div><p><strong>University Name:</strong> {{ academic.university_name }}</p></div>
+                <div><p><strong>Specialization:</strong> {{ academic.Specialization }}</p></div>
+                <div><p><strong>Grading System:</strong> {{ academic.grading_system }}</p></div>
+                <div><p><strong>Grading Marks:</strong> {{ academic.grading_marks }}</p></div>
+            </div>
+            {% endif %}
+        {% endfor %}
+
+
+
+        <!-- Graduate Details -->
+        <h2>Graduate Details</h2>
+        {% for graduate in graduate_details %}
+        <div class="details-section">
+            <div><p><strong>Course Name:</strong> {{ graduate.course_name }}</p></div>
+            <div><p><strong>Course Duration Start:</strong> {{ graduate.course_duration_start }}</p></div>
+            <div><p><strong>Course Duration End:</strong> {{ graduate.course_duration_end }}</p></div>
+            <div><p><strong>Course Type:</strong> {{ graduate.course_type }}</p></div>
+            <div><p><strong>University Name:</strong> {{ graduate.university_name }}</p></div>
+            <div><p><strong>Department:</strong> {{ graduate.department }}</p></div>
+            <div><p><strong>Grading System:</strong> {{ graduate.grading_system }}</p></div>
+            <div><p><strong>Grading Marks:</strong> {{ graduate.grading_marks }}</p></div>
+        </div>
+        {% endfor %}
+
+
+        <!-- Diploma/XII Details -->
+        <h2>12th Grade & Diploma Details</h2>
+        {% for diploma in diploma_details %}
+        <div class="details-section">
+            {% if diploma.relevent_course == '12thGrade' %}
+                <!-- 12th Grade Details -->
+                <h3>12th Grade Details</h3>
+                <div><p><strong>Relevant Course:</strong> {{ diploma.relevent_course }}</p></div>
+                <div><p><strong>Board of Education:</strong> {{ diploma.board_of_education }}</p></div>
+                <div><p><strong>Specialization:</strong> {{ diploma.specialization }}</p></div>
+                <div><p><strong>School Name:</strong> {{ diploma.school_name }}</p></div>
+                <div><p><strong>Duration Start:</strong> {{ diploma.duration_start }}</p></div>
+                <div><p><strong>Duration End:</strong> {{ diploma.duration_end }}</p></div>
+                <div><p><strong>Grading System:</strong> {{ diploma.grading_system }}</p></div>
+                <div><p><strong>Grading Marks:</strong> {{ diploma.grading_marks }}</p></div>
+            {% else %}
+                <!-- Diploma Details -->
+                <h3>Diploma Details</h3>
+                <div><p><strong>Course Name:</strong> {{ diploma.course_name }}</p></div>
+                <div><p><strong>Diploma Specialization:</strong> {{ diploma.diploma_specialization }}</p></div>
+                <div><p><strong>University:</strong> {{ diploma.university }}</p></div>
+                <div><p><strong>Diploma Duration Start:</strong> {{ diploma.diploma_duration_start }}</p></div>
+                <div><p><strong>Diploma Duration End:</strong> {{ diploma.diploma_duration_end }}</p></div>
+                <div><p><strong>Course Type:</strong> {{ diploma.course_type }}</p></div>
+                <div><p><strong>Diploma Grading System:</strong> {{ diploma.diploma_grading_system }}</p></div>
+                <div><p><strong>Diploma Grading Marks:</strong> {{ diploma.diploma_grading_marks }}</p></div>
+            {% endif %}
+        </div>
+        {% endfor %}
+
+
+
+        <!-- Xth Details -->
+        <h2>Xth Details</h2>
+        {% for xth in xth_details %}
+        <div class="details-section">
+            <div><p><strong>School Name:</strong> {{ xth.school_name }}</p></div>
+            <div><p><strong>Board of Education:</strong> {{ xth.board_of_education }}</p></div>
+            <div><p><strong>Roll No:</strong> {{ xth.roll_no }}</p></div>
+            <div><p><strong>Grading System:</strong> {{ xth.grading_system }}</p></div>
+            <div><p><strong>Grading Marks:</strong> {{ xth.grading_marks }}</p></div>
+            <!-- Other fields here -->
+        </div>
+        {% endfor %}
+
+        <!-- Other Qualifications -->
+        <h2>Other Qualifications</h2>
+        {% if other_qualifications %}
+            {% for other_qualification in other_qualifications %}
+                {% if other_qualification.course_name %}
+                <div class="details-section">
+                    <div><p><strong>Course Name:</strong> {{ other_qualification.course_name }}</p></div>
+                    <div><p><strong>Specialization:</strong> {{ other_qualification.specialization }}</p></div>
+                    <div><p><strong>Course Type:</strong> {{ other_qualification.course_type }}</p></div>
+                    <div><p><strong>Grading Marks:</strong> {{ other_qualification.grading_marks }}</p></div>
+                    <div><p><strong>Grading System:</strong> {{ other_qualification.grading_system }}</p></div>
+                    <div><p><strong>Duration Start:</strong> {{ other_qualification.duration_start }}</p></div>
+                    <div><p><strong>Duration End:</strong> {{ other_qualification.duration_end }}</p></div>
+                </div>
+                {% else %}
+                <div class="details-section">
+                    <p><strong>No additional qualifications</strong></p>
+                </div>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <div class="details-section">
+                <p><strong>No additional qualifications</strong></p>
+            </div>
+        {% endif %}
+        
+
+        <!-- Work Experience -->
+        <h2>Work Experience</h2>
+        {% for work in work_experiences %}
+            {% if work.have_experience == 'yes' %}
+            <div class="details-section">
+                <div><p><strong>Company Name:</strong> {{ work.company_name }}</p></div>
+                <div><p><strong>Work Experience:</strong> {{ work.experience }}</p></div>
+                <div><p><strong>Employee Type:</strong> {{ work.employee_type }}</p></div>
+                <div><p><strong>Designation:</strong> {{ work.designation }}</p></div>
+                <div><p><strong>Annual Salary:</strong> {{ work.annual_salary }} <strong>LPA</strong></p></div>
+                <div><p><strong>Duration From:</strong> {{ work.duration_from }}</p></div>
+                <div><p><strong>Duration To:</strong> {{ work.duration_to }}</p></div>
+            </div>
+            {% else %}
+            <div class="details-section">
+                <p><strong>No experience</strong></p>
+            </div>
+            {% endif %}
+        {% endfor %}
+
+
+        <!-- Arrear Details -->
+        <h2>Arrear Details</h2>
+        {% for arrear in arrear_details %}
+            {% if arrear.arrears == 'yes' %}
+            <div class="details-section">
+                <div><p><strong>Arrears:</strong> {{ arrear.arrears }}</p></div>
+                <div><p><strong>Active History of Arrear:</strong> {{ arrear.active_history_arrear }}</p></div>
+                <div><p><strong>Arrear Count:</strong> {{ arrear.arrear_count }}</p></div>
+            </div>
+            {% else %}
+            <div class="details-section">
+                <p><strong>No arrears</strong></p>
+            </div>
+            {% endif %}
+        {% endfor %}
+
+
+        <!-- Other Details -->
+        <h2>Other Details</h2>
+        {% if other_details %}
+            {% for other_detail in other_details %}
+                <div class="details-section">
+                    <div><p><strong>Nationality:</strong> {{ other_detail.nationality }}</p></div>
+                    <div><p><strong>Language:</strong> {{ other_detail.language }}</p></div>
+                    <div><p><strong>Speaks:</strong> {{ other_detail.speak|yesno:"Yes,No" }}</p></div>
+                    <div><p><strong>Reads:</strong> {{ other_detail.read|yesno:"Yes,No" }}</p></div>
+                    <div><p><strong>Writes:</strong> {{ other_detail.write|yesno:"Yes,No" }}</p></div>
+                    <div><p><strong>Mother Tongue:</strong> {{ other_detail.mother_tongue }}</p></div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="details-section">
+                <p><strong>No additional details available</strong></p>
+            </div>
+        {% endif %}
+
+
+        <!-- Photo and CV -->
+        <h2>Photo & CV</h2>
+        {% if photo_cv %}
+        <div class="details-section">
+            <div>
+                {% load static %}
+                <strong>Photo:</strong>
+                <p> <img style="height: 200px;" src="{% static 'photos/' %}{{ photo_cv.photo }}" alt="Student Photo"></p>
+            </div>
+            <div><p><strong>CV:</strong> <a href="{% static 'resumes/' %}{{ photo_cv.cv }}">Download CV</a></p></div>
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>

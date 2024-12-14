@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Appointment</title>
+  {% load static %}
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url("{% static 'assets/images/bg2.JPEG' %}");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100vh;
+    }
+
+    .container {
+      max-width: 600px;
+      margin-top: 10px;
+      margin-left: 430px;
+      padding: 30px;
+      background-color: white;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #3498db;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-size: 16px;
+      margin-bottom: 8px;
+      color: #333;
+      text-align: left;
+    }
+
+    input, select, textarea {
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+      padding: 12px 0;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #2980b9;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group input[type="date"],
+    .form-group input[type="time"] {
+      width: 100%;
+    }
+
+    .home-btn {
+      display: inline-block;
+      background-color: #3498db;
+      color: white;
+      padding: 12px 30px;
+      margin-top: 20px;
+      font-size: 16px;
+      text-decoration: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .home-btn:hover {
+      background-color: #2980b9;
+    }
+
+    .form-group input[type="time"],
+    .form-group select {
+      width: 50%;
+      margin-right: 10px;
+    }
+
+    .form-group div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #message {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 14px;
+      display: none;
+    }
+
+    #message.success {
+      background-color: #d4edda;
+      color: #155724;
+    }
+
+    #message.error {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+    @media screen and (max-width: 768px) {
+    body {
+      padding: 10px;
+      background-image: url("{% static 'assets/images/bg2.JPEG' %}");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
+    .container {
+      margin: 0 auto;
+      margin-top: 20px;
+      padding: 20px;
+      max-width: 90%;
+      background-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      font-size: 20px;
+    }
+
+    label {
+      font-size: 14px;
+    }
+
+    input, select, textarea {
+      font-size: 14px;
+      padding: 10px;
+    }
+
+    input[type="submit"], .home-btn {
+      font-size: 14px;
+      padding: 10px 0;
+    }
+
+    .form-group div {
+      flex-direction: column;
+    }
+
+    .form-group input[type="time"], 
+    .form-group select {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+
+    .home-btn {
+      margin-top: 15px;
+    }
+  }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Appointment Form</h2>
+    <form id="appointment-form" method="POST">
+      {% csrf_token %}
+      <!-- Name -->
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required placeholder="Enter your full name">
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required placeholder="Enter your email">
+      </div>
+
+      <!-- Phone Number -->
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
+      </div>
+
+      <!-- Address -->
+      <div class="form-group">
+        <label for="address">Address</label>
+        <textarea id="address" name="address" rows="4" required placeholder="Enter your address"></textarea>
+      </div>
+
+      <!-- Date -->
+      <div class="form-group">
+        <label for="date">Appointment Date</label>
+        <input type="date" id="date" name="date" required>
+      </div>
+
+      <!-- Time with AM/PM selection -->
+      <div class="form-group">
+        <label for="time">Appointment Time</label>
+        <div>
+          <input type="time" id="time" name="time" required>
+          <select name="ampm" id="ampm">
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="form-group">
+        <input type="submit" value="Book Appointment">
+        <a href="{% url 'home' %}" class="home-btn">Home</a>
+      </div>
+    </form>
+    <div id="message"></div>
+  </div>
+
+  <script>
+    document.getElementById('appointment-form').addEventListener('submit', function(event) {
+    event.preventDefault();  // Prevent form submission to handle via JavaScript
+
+    // Collect form data
+    var formData = new FormData(this);
+
+    // Send form data to server (example URL: '/submit_form')
+    fetch('appointment', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Display success alert
+            alert("APPOINMENT BOOKED SUCCES!");
+            window.location.href = '{% url "home" %}';
+
+        } else {
+            // Display error alert
+            alert("SLOT BOOKED: " + data.message);
+        }
+    })
+    .catch(error => {
+        alert("Error: " + error);
+    });
+});
+
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const dateInput = document.getElementById('date');
+    const timeInput = document.getElementById('time');
+    const today = new Date();
+    
+    // Format the date as YYYY-MM-DD
+    const formattedDate = today.toISOString().split('T')[0];
+    
+    // Set the min attribute to today's date
+    dateInput.setAttribute('min', formattedDate);
+
+    // Add an event listener to validate the time
+    timeInput.addEventListener('input', function () {
+      const selectedDate = new Date(dateInput.value);
+      const now = new Date();
+      const selectedTime = timeInput.value.split(':');
+      
+      // If the selected date is today, validate the time
+      if (selectedDate.toDateString() === now.toDateString()) {
+        const selectedHour = parseInt(selectedTime[0], 10);
+        const selectedMinute = parseInt(selectedTime[1], 10);
+        
+        if (
+          selectedHour < now.getHours() || 
+          (selectedHour === now.getHours() && selectedMinute < now.getMinutes())
+        ) {
+          alert("The selected time cannot be before the current time.");
+          timeInput.value = ""; // Reset the invalid time input
+        }
+      }
+    });
+  });
+</script>
+</body>
+</html>

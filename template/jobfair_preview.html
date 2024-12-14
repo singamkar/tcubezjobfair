@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #0056a3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #0056a3;
+            color: white;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Application Details</h1>
+
+        <h2>Personal Details</h2>
+        <table>
+            <tr>
+                <th>Name</th>
+                <td>{{ application.name }}</td>
+            </tr>
+            <tr>
+                <th>Date of Birth</th>
+                <td>{{ application.date_of_birth }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ application.email }}</td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td>{{ application.gender }}</td>
+            </tr>
+            <tr>
+                <th>Father's Name</th>
+                <td>{{ application.father_name }}</td>
+            </tr>
+            <tr>
+                <th>Mother's Name</th>
+                <td>{{ application.mother_name }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ application.address }}</td>
+            </tr>
+            <tr>
+                <th>Aadhar Number</th>
+                <td>{{ application.Registration.aadhar_num }}</td>
+            </tr>
+            <tr>
+                <th>PAN Number</th>
+                <td>{{ application.Registration.pan_num }}</td>
+            </tr>
+        </table>
+
+        <h2>Education Details - Graduation</h2>
+        <table>
+            <tr>
+                <th>Education Level</th>
+                <td>{{ application.education_level }}</td>
+            </tr>
+            <tr>
+                <th>Degree</th>
+                <td>{{ application.degree }}</td>
+            </tr>
+            <tr>
+                <th>Institute Name</th>
+                <td>{{ application.institute_name }}</td>
+            </tr>
+            <tr>
+                <th>Start Date</th>
+                <td>{{ application.degree_start_date }}</td>
+            </tr>
+            <tr>
+                <th>End Date</th>
+                <td>{{ application.degree_end_date }}</td>
+            </tr>
+            <tr>
+                <th>Percentage</th>
+                <td>{{ application.degree_percentage }}</td>
+            </tr>
+        </table>
+
+        <h2>Education Details - Diploma</h2>
+        <table>
+            <tr>
+                <th>Diploma Name</th>
+                <td>{{ application.diploma_name }}</td>
+            </tr>
+            <tr>
+                <th>Diploma Institute Name</th>
+                <td>{{ application.diploma_institute_name }}</td>
+            </tr>
+            <tr>
+                <th>Start Date</th>
+                <td>{{ application.diploma_start_date }}</td>
+            </tr>
+            <tr>
+                <th>End Date</th>
+                <td>{{ application.diploma_end_date }}</td>
+            </tr>
+            <tr>
+                <th>Percentage</th>
+                <td>{{ application.diploma_percentage }}</td>
+            </tr>
+        </table>
+
+        <h2>10th Grade Details</h2>
+        <table>
+            <tr>
+                <th>School Name</th>
+                <td>{{ application.school_name_10th }}</td>
+            </tr>
+            <tr>
+                <th>Board</th>
+                <td>{{ application.board_10th }}</td>
+            </tr>
+            <tr>
+                <th>Start Date</th>
+                <td>{{ application.start_date_10th }}</td>
+            </tr>
+            <tr>
+                <th>End Date</th>
+                <td>{{ application.end_date_10th }}</td>
+            </tr>
+            <tr>
+                <th>Percentage</th>
+                <td>{{ application.percentage_10th }}</td>
+            </tr>
+            <tr>
+                <th>Marks</th>
+                <td>{{ application.marks_10th }}</td>
+            </tr>
+        </table>
+
+        <h2>12th Grade Details</h2>
+        <table>
+            <tr>
+                <th>School Name</th>
+                <td>{{ application.school_name_12th }}</td>
+            </tr>
+            <tr>
+                <th>Board</th>
+                <td>{{ application.board_12th }}</td>
+            </tr>
+            <tr>
+                <th>Start Date</th>
+                <td>{{ application.start_date_12th }}</td>
+            </tr>
+            <tr>
+                <th>End Date</th>
+                <td>{{ application.end_date_12th }}</td>
+            </tr>
+            <tr>
+                <th>Percentage</th>
+                <td>{{ application.percentage_12th }}</td>
+            </tr>
+            <tr>
+                <th>Marks</th>
+                <td>{{ application.marks_12th }}</td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+</html>

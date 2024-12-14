@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Registration & Login</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #9eb0d6;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-image: url("{% static 'assets/images/bg.JPEG' %}");
+            background-size: cover;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .buttoncontainer {
+            display: flex;
+            justify-content: center;
+            margin-top: 180px;
+        }
+        .buttoncontainer button {
+            padding: 15px 30px;
+            font-size: 16px;
+        }
+        .card-img-top {
+            height: 150px;
+            width: 150px;
+            margin-left: 60px;
+            padding: 20px;
+        }
+        .btn-orange {
+            background-color: #11565c;
+            border-color: #11565c;
+            color: white;
+        }
+        .btn-orange:hover {
+            background-color: #f9c845;
+            border-color: #f9c845;
+        }
+        .card {
+            border: 1px solid orange;
+            box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+        }
+        #registeredCollegeBtn {
+            margin-right: 10px;
+        }
+        .modal-body {
+            max-height: 430px;
+            overflow-y: auto;
+        }
+        .modal-dialog {
+            margin: 30px auto;
+        }
+        .modal-content {
+            border-radius: 0;
+        }
+        /* General Responsive Adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .buttoncontainer {
+                flex-direction: column;
+                margin-top: 100px;
+            }
+
+            .row {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .col-6 {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .card {
+                width: 100%;
+                margin-left: -60px;
+            }
+
+            .card-img-top {
+                height: 100px;
+                width: 100px;
+                margin: 0 auto;
+            }
+
+            .modal-dialog {
+                margin: 20px;
+            }
+
+            .modal-content {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .card-img-top {
+                height: 100px;
+                width: 100px;
+            }
+
+            .btn-orange {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .modal-body {
+                max-height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="buttoncontainer">
+        <div class="row">
+            <div class="col-6">
+                <div class="card text-center" style="width: 18rem;">
+                    <img class="card-img-top" src="{% static 'assets/images/add.png' %}" alt="Add New College">
+                    <div class="card-body">
+                    <a href="{% url 'college_registration_form' %}" style="text-decoration: none;"><button id="newCollegeBtn" class="btn btn-orange btn-block">New College</button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card text-center" style="width: 18rem;">
+                    <img class="card-img-top" src="{% static 'assets/images/register.png' %}" alt="Registered College">
+                    <div class="card-body">
+                        <button id="registeredCollegeBtn" class="btn btn-orange btn-block" data-toggle="modal" data-target="#loginModal">Registered College</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Registered College Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Registered College Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="userId">User ID:</label>
+                            <input type="text" id="userId" name="userId" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" id="password" name="password" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-orange">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  {% if messages %}
+  <script>
+    {% for message in messages %}
+      Swal.fire({
+        icon: "{% if message.tags == 'success' %}success{% else %}error{% endif %}",
+        title: "{{ message }}",
+        timer: 3000,
+        showConfirmButton: false
+      });
+    {% endfor %}
+  </script>
+{% endif %}
+
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE HR Company - Application Form</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery, Popper.js, and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+        body {
+            background-image: url("{% static 'assets/images/bg2.JPEG' %}");
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            background-attachment: fixed;
+            overflow: hidden;
+        }
+        .container::-webkit-scrollbar {
+        display: none;
+        }
+
+        .container {
+        scrollbar-width: none;
+        max-width: 1320px;
+        height: 85vh; 
+        padding: 30px;
+        background-color: white;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        overflow-y: auto;
+        }
+        .tcs-header {
+            background-color: #0056a3;
+            padding: 20px;
+            color: white;
+            font-size: 28px;
+            text-align: center;
+        }
+        .navbar {
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            padding: 10px;
+        }
+        .navbar a {
+            color: #000;
+            margin-right: 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .navbar a.active {
+            color: #0094cf;
+        }
+        .form-link {
+            display: block;
+            margin-bottom: 10px;
+            text-decoration: none;
+        }
+        .form-container {
+            margin-top: 20px;
+            background-color: white;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-header {
+            background-color: #f8f9fa;
+            padding: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .form-section-header {
+            background-color: #f0f0f0;
+            padding: 10px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .submit-btn {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .btn-continue {
+            background-color: #f4476b;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        .form-label {
+            font-weight: bold;
+            display: inline-block;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="tcs-header">
+        <span>THE HR Company</span>
+    </div>
+    <div class="container form-container">
+        {% if messages %}
+            <div class=" mt-3">
+                {% for message in messages %}
+                    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %} alert-dismissible fade show" role="alert" style="color: white; background-color: red;padding: 20px;width: 1000px;margin-left: 100px;">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <div class="form-header">
+            <h3>Application Form</h3>
+        </div>
+
+        <!-- Navbar Section -->
+        <div class="navbar">
+            <a href="{% url 'personal_1' %}">Personal Details</a>
+            <a href="{% url 'academic' %}">Academic and Work Experience Details</a>
+            <a href="{% url 'other_details' %}" class="active">Other Details</a>
+            <a href="{% url 'preview' %}">Application Form Preview</a>
+        </div>
+
+        <!-- Content Section -->
+        <div class="container">
+            <div class="row">
+                <!-- Left Side (Other Details) -->
+                <div class="col-md-4">
+                    <div class="form-section-header">Other Details</div>
+                    <div class="mb-3">
+                        <a href="{% url 'other_details' %}" class="form-link">
+                            <label for="qualification" class="form-label">Nationality and Languages Known</label>
+                        </a>
+                    </div>
+                    <div class="mb-3">
+                        <a href="{% url 'resume' %}" class="form-link">
+                            <label for="cv" class="form-label" style="color: black;">Upload Photo / CV</label>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Side (Form Section) -->
+                <div class="col-md-8">
+                    <!-- Form Container -->
+                    <div class="form-container">
+                        <!-- Nationality Form -->
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="nationality" class="form-label">Nationality</label>
+                                <select id="nationality" name="nationality" class="form-select" required>
+                                    <option value="indian" {% if other_details_data and other_details_data.0.nationality == "indian" %}selected{% endif %}>Indian</option>
+                                </select>
+                            </div>
+                        
+                            <h4>Languages Known</h4>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Language</th>
+                                        <th>Speak</th>
+                                        <th>Read</th>
+                                        <th>Write</th>
+                                        <th>Mother Tongue</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="languages-body">
+                                    {% if other_details_data %}
+                                        {% for detail in other_details_data %}
+                                        <tr>
+                                            <td>
+                                                <select name="language" class="form-select" required>
+                                                    <option value="">Select Language</option>
+                                                    <option value="tamil" {% if detail.language == "tamil" %}selected{% endif %}>Tamil</option>
+                                                    <option value="hindi" {% if detail.language == "hindi" %}selected{% endif %}>Hindi</option>
+                                                    <option value="malayalam" {% if detail.language == "malayalam" %}selected{% endif %}>Malayalam</option>
+                                                    <option value="telugu" {% if detail.language == "telugu" %}selected{% endif %}>Telugu</option>
+                                                    <option value="english" {% if detail.language == "english" %}selected{% endif %}>English</option>
+                                                    <option value="kannada" {% if detail.language == "kannada" %}selected{% endif %}>Kannada</option>
+                                                    <option value="bengali" {% if detail.language == "bengali" %}selected{% endif %}>Bengali</option>
+                                                    <option value="marathi" {% if detail.language == "marathi" %}selected{% endif %}>Marathi</option>
+                                                    <option value="gujarati" {% if detail.language == "gujarati" %}selected{% endif %}>Gujarati</option>
+                                                    <option value="punjabi" {% if detail.language == "punjabi" %}selected{% endif %}>Punjabi</option>
+                                                    <option value="urdu" {% if detail.language == "urdu" %}selected{% endif %}>Urdu</option>
+                                                    <option value="arabic" {% if detail.language == "arabic" %}selected{% endif %}>Arabic</option>
+                                                    <option value="mandarin" {% if detail.language == "mandarin" %}selected{% endif %}>Mandarin</option>
+                                                    <option value="japanese" {% if detail.language == "japanese" %}selected{% endif %}>Japanese</option>
+                                                    <option value="korean" {% if detail.language == "korean" %}selected{% endif %}>Korean</option>
+                                                    <option value="vietnamese" {% if detail.language == "vietnamese" %}selected{% endif %}>Vietnamese</option>
+                                                    <option value="thai" {% if detail.language == "thai" %}selected{% endif %}>Thai</option>
+                                                    <option value="indonesian" {% if detail.language == "indonesian" %}selected{% endif %}>Indonesian</option>
+                                                    <option value="filipino" {% if detail.language == "filipino" %}selected{% endif %}>Filipino</option>
+                                                    <option value="malaysian" {% if detail.language == "malaysian" %}selected{% endif %}>Malaysian</option>
+                                                    <option value="nepali" {% if detail.language == "nepali" %}selected{% endif %}>Nepali</option>
+                                                    <option value="sinhala" {% if detail.language == "sinhala" %}selected{% endif %}>Sinhala</option>
+                                                    <option value="others" {% if detail.language == "others" %}selected{% endif %}>Others</option>
+                                                </select>
+                                            </td>
+                                            <td><input type="checkbox" name="speak" class="form-check-input" {% if detail.speak %}checked{% endif %}></td>
+                                            <td><input type="checkbox" name="read" class="form-check-input" {% if detail.read %}checked{% endif %}></td>
+                                            <td><input type="checkbox" name="write" class="form-check-input" {% if detail.write %}checked{% endif %}></td>
+                                            <td><input type="checkbox" name="mother-tongue" class="form-check-input" {% if detail.mother_tongue == detail.language %}checked{% endif %}></td>
+                                        </tr>
+                                        {% endfor %}
+                                    {% else %}
+                                        <tr>
+                                            <td>
+                                                <select name="language" class="form-select" required>
+                                                    <option value="">Select Language</option>
+                                                    <option value="tamil">Tamil</option>
+                                                    <option value="hindi">Hindi</option>
+                                                    <option value="malayalam">Malayalam</option>
+                                                    <option value="telugu">Telugu</option>
+                                                    <option value="english">English</option>
+                                                    <option value="kannada">Kannada</option>
+                                                    <option value="bengali">Bengali</option>
+                                                    <option value="marathi">Marathi</option>
+                                                    <option value="gujarati">Gujarati</option>
+                                                    <option value="punjabi">Punjabi</option>
+                                                    <option value="urdu">Urdu</option>
+                                                    <option value="arabic">Arabic</option>
+                                                    <option value="mandarin">Mandarin</option>
+                                                    <option value="japanese">Japanese</option>
+                                                    <option value="korean">Korean</option>
+                                                    <option value="vietnamese">Vietnamese</option>
+                                                    <option value="thai">Thai</option>
+                                                    <option value="indonesian">Indonesian</option>
+                                                    <option value="filipino">Filipino</option>
+                                                    <option value="malaysian">Malaysian</option>
+                                                    <option value="nepali">Nepali</option>
+                                                    <option value="sinhala">Sinhala</option>
+                                                    <option value="others">Others</option>
+                                                </select>
+                                            </td>
+                                            <td><input type="checkbox" name="speak" class="form-check-input"></td>
+                                            <td><input type="checkbox" name="read" class="form-check-input"></td>
+                                            <td><input type="checkbox" name="write" class="form-check-input"></td>
+                                            <td><input type="checkbox" name="mother-tongue" class="form-check-input"></td>
+                                        </tr>
+                                    {% endif %}
+                                </tbody>
+                                
+                            </table>
+                        
+                            <button type="button" class="btn btn-primary" onclick="addRow()">Add New Row</button>
+                            <button type="button" class="btn btn-danger" onclick="deleteRow()">Delete Row</button>
+                        
+                            <br><br>
+                            <!-- Continue Button -->
+                            <div class="submit-btn">
+                                <button type="submit" class="btn btn-continue">Continue</button>
+                            </div>
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Add/Remove Row Script -->
+    <script>
+        function addRow() {
+            let table = document.getElementById("languages-body");
+            let row = table.insertRow();
+            row.innerHTML = `
+                <td>
+                    <select required name="language" class="form-select">
+                        <option value="">Select Language</option>
+                        <option value="tamil">Tamil</option>
+                        <option value="hindi">Hindi</option>
+                        <option value="malayalam">Malayalam</option>
+                        <option value="telugu">Telugu</option>
+                        <option value="english">English</option>
+                        <option value="kannada">Kannada</option>
+                        <option value="bengali">Bengali</option>
+                        <option value="marathi">Marathi</option>
+                        <option value="gujarati">Gujarati</option>
+                        <option value="punjabi">Punjabi</option>
+                        <option value="urdu">Urdu</option>
+                        <option value="arabic">Arabic</option>
+                        <option value="mandarin">Mandarin</option>
+                        <option value="japanese">Japanese</option>
+                        <option value="korean">Korean</option>
+                        <option value="vietnamese">Vietnamese</option>
+                        <option value="thai">Thai</option>
+                        <option value="indonesian">Indonesian</option>
+                        <option value="filipino">Filipino</option>
+                        <option value="malaysian">Malaysian</option>
+                        <option value="nepali">Nepali</option>
+                        <option value="sinhala">Sinhala</option>
+                        <option value="others">Others</option>
+                    </select>
+                </td>
+                <td><input type="checkbox" name="speak" class="form-check-input"></td>
+                <td><input type="checkbox" name="read" class="form-check-input"></td>
+                <td><input type="checkbox" name="write" class="form-check-input"></td>
+                <td><input type="checkbox" name="mother-tongue" class="form-check-input"></td>
+            `;
+        }
+    
+        function deleteRow() {
+            let table = document.getElementById("languages-body");
+            if (table.rows.length > 1) {
+                table.deleteRow(-1);
+            }
+        }
+    </script>
+    
+    
+    
+</body>
+</html>

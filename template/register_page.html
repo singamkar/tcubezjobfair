@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body, html {
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+            align-items: center;
+            justify-content: center;
+            background-color: #f2f2f2;
+        }
+
+        .signup-container {
+            display: flex;
+            width: 900px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .signup-image {
+            width: 50%;
+            background: linear-gradient(to bottom, rgba(245, 0, 87, 0.6), rgba(121, 85, 72, 0.6)), url('https://via.placeholder.com/450x650');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .signup-form {
+            width: 50%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .signup-form h2 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f7f7f7;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #ff4081;
+            background-color: #fff;
+        }
+
+        .form-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .terms {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #ff4081;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #d81b60;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="signup-container">
+            <!-- Image Section -->
+            <div class="signup-image"></div>
+
+            <!-- Form Section -->
+            <div class="signup-form">
+                <h2>Registeration Page</h2>
+                <form>
+                    <!-- {% csrf_token %} -->
+                    <div class="form-group">
+                        <input type="text" id="form-control" name="Name" placeholder="Username" 
+                        pattern="[A-Za-z\s]{4,}" title="Name must contain at least 4 letters and only letters and spaces are allowed" 
+                        minlength="4" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" id="College Name"  name ="College Name" placeholder="College Name" 
+                        pattern="[A-Za-z0-9\s .,&-]{4,}" title="Please enter a valid college name (letters, numbers, spaces, )."
+                        minlength="4" required>
+                    </div>
+                    
+                    
+                    <div class="form-group">
+                        <input type="text" id="Contact Number" name = "Contact Number" placeholder="Contact Number" 
+                        pattern="^[6-9]{1}[0-9]{9}$" title="Please enter a valid contact number (10 digits long, starting with 6, 7, 8, or 9)."
+                        exactly="10" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="text" id="college code number" name ="college code number"placeholder="college code number" 
+                        pattern="^\d{4}$" title="Please enter a valid college code (exactly 4 numeric digits)."
+                        minlength="4" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            placeholder="email" 
+                            pattern="^[a-z]{1}[a-z0-9]{3,}@(gmail\.com|email\.com|yahoo\.com)$" 
+                            title="Please enter a valid email address (e.g.,example@gmail.com). The first letter should be lowercase, at least 4 characters before the '@', and must be one of the following domains: gmail.com, email.com, or yahoo.com. No spaces or capital letters are allowed."
+                            required
+                        >
+                    </div>
+                    <button type="submit" class="btn">send otp</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

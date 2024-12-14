@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education Details Form</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url("{% static 'assets/images/bg2.JPEG' %}");
+            background-size: 100% auto;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            margin-top: 50px;
+            max-width: 800px;
+        }
+
+        h2, h3 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+            color: #007bff;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-section-header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-control {
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 1rem;
+        }
+
+        .btn-custom {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-custom:hover {
+            background-color: #0056b3;
+        }
+
+        .radio-container {
+            margin: 15px 0;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .row .col-md-6 {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center">Education Details Form</h2>
+        
+        <form id="userDetailsForm" method="POST" name="userDetailsForm">
+            {% csrf_token %}
+            <div class="form-section">
+                <h3 class="form-section-header">Personal Details</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="Enter your full name" pattern="^(?=.*[A-Za-z])[A-Za-z\s]{3,}$" title="Please enter a valid name (only alphabets and spaces allowed, minimum 3 characters)" minlength="3" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="dob">Date of Birth:</label>
+                            <input type="date" id="dob" name="dob" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+                <!-- Email and Gender -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="email">Email ID:</label>
+                            <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" pattern="^[a-z0-9.][A-Za-z0-9.]*@(gmail\.com|yahoo\.com|hotmail\.com)$" title="Email must start with an alphabet followed by letters and numbers, and must end with @gmail.com, @yahoo.com, or @hotmail.com." required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="gender">Gender:</label>
+                            <select id="gender" name="gender" class="form-control" required>
+                                <option value="" disabled selected>Select your gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="fatherName">Father's Name:</label>
+                            <input type="text" id="fatherName" name="fatherName" class="form-control" placeholder="Enter your father's name" pattern="^[A-Za-z\s]{3,}$" title="Please enter a valid name (only alphabets allowed, minimum 3 characters)" minlength="3" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="motherName">Mother's Name:</label>
+                            <input type="text" id="motherName" name="motherName" class="form-control" placeholder="Enter your mother's name" pattern="^[A-Za-z\s]{3,}$" title="Please enter a valid name (only alphabets allowed, minimum 3 characters)" minlength="3" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Address -->
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <textarea id="address" name="address" class="form-control" rows="3" minlength="5" placeholder="Enter your address" required pattern="^[0-9]+\s[A-Za-z0-9\s.,'-]+,\s?[A-Za-z\s]+,\s?[A-Za-z]{2}\s?[0-9]{5}(-[0-9]{4})?$" title="Please enter a valid address format (e.g., 123 Main St, Springfield, IL 62701)"></textarea>
+                </div>
+            </div>
+
+            <!-- Education Details -->
+            <div class="form-check radio-container">
+                <h3 class="form-section-header">Educational Details</h3>
+                        <input type="radio" id="graduation" name="educationLevel" value="graduation" class="form-check-input" onclick="toggleEducationFields()" required>
+                        <label for="graduation" class="form-check-label">Graduation</label>
+                    </div>
+
+                    <div class="form-check radio-container">
+                        <input type="radio" id="diploma" name="educationLevel" value="diploma" class="form-check-input" onclick="toggleEducationFields()" required>
+                        <label for="diploma" class="form-check-label">Diploma</label>
+                    </div>
+
+                    <!-- graduationFields Marks Obtained -->
+                    <div id="graduationFields" class="education-fields hidden">
+                        <h3 class="form-section-header">Graduation Details</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                <label for="graduationDegree">Degree with Specialization:</label>
+                                <input type="text" id="graduationDegree" name="degree" class="form-control" placeholder="Enter your degree with specialization" pattern="^[A-Za-z\s]{3,}$" title="Please enter a valid degree with specialization (only alphabets allowed, minimum 3 characters)" required>    
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="graduationInstituteName">Institute Name:</label>
+                                <input type="text" id="graduationInstituteName" name="instituteName" class="form-control" placeholder="Enter your institute name" pattern="^[A-Za-z\s]{3,}$" title="Please enter a valid institutename (only alphabets allowed, minimum 3 characters)" required>    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">  
+                            <div class="form-group">
+                                <label for="graduationStartDate">Start Date:</label>
+                                <input type="date" id="graduationStartDate" name="degreestartdate" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="graduationEndDate">End Date:</label>
+                                <input type="date" id="graduationEndDate" name="degreeenddate" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="graduationPercentage">Percentage Obtained:</label>
+                        <input type="number" id="graduationPercentage" name="degreepercentage" class="form-control" min="0" max="100" required>
+                    </div>
+                </div>
+                <!-- DIPLOMA Grade Marks Obtained -->
+                <div id="diplomaFields" class="education-fields hidden">
+                    <h3 class="form-section-header">Diploma Details</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="diplomaName">Diploma Name:</label>
+                                <input type="text" id="diplomaName" name="diploma" class="form-control" placeholder="Enter your diploma" pattern="^[A-Za-z\s]{3,}$" title="Please enter a valid diploma Name (only alphabets allowed, minimum 3 characters)" minlength="3" required>         
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="diplomaInstituteName">Institute Name:</label>
+                                <input type="text" id="diplomaInstituteName" name="diplomainstitutename" class="form-control" placeholder="Enter your institute name" 
+                                pattern="^[A-Za-z\s]{3,}$" title="Please enter a valid Institute  Name (only alphabets allowed, minimum 3 characters)" minlength="3" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">  
+                            <div class="form-group">
+                                <label for="diplomaStartDate">Start Date:</label>
+                                <input type="date" id="diplomaStartDate" name="startdate" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="diplomaEndDate">End Date:</label>
+                                <input type="date" id="diplomaEndDate" name="enddate" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="diplomaPercentage">Percentage Obtained:</label>
+                        <input type="number" id="diplomaPercentage" name="diplomapercentage" class="form-control" min="0" max="100" required>
+                    </div>
+                </div>
+                    <!-- 10th Grade Marks Obtained -->
+                    <div class="form-section" id="10th">
+                        <h3 class="form-section-header">10th Details</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="schoolName10th">School Name:</label>
+                                    <input type="text" id="schoolName10th" name="schoolname10th" class="form-control" placeholder="Enter your school name" 
+                                    pattern="^[A-Za-z\s]{3,}$" 
+                                    title="Please enter a valid school name (only alphabets allowed, minimum 3 characters)" 
+                                    minlength="3" required>      
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="board10th">Board of Education:</label>
+                                    <select id="board10th" name="board10th" class="form-control" required>
+                                        <option value="" disabled selected>Select your board of education</option>
+                                        <option value="CBSE">CBSE (Central Board of Secondary Education)</option>
+                                        <option value="ICSE">ICSE (Indian Certificate of Secondary Education)</option>
+                                        <option value="Tamil Nadu State Board">Tamil Nadu State Board</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="startDate10th">Start Date:</label>
+                                    <input type="date" id="startDate10th" name="startdate10th" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="endDate10th">End Date:</label>
+                                    <input type="date" id="endDate10th" name="enddate10th" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-check radio-container">
+                            <input type="radio" id="percentage10th" name="markstype10th" value="percentage" class="form-check-input" onclick="toggleMarksFields('10th')" required>
+                            <label for="percentage10th" class="form-check-label">Percentage</label>
+                        </div>
+
+                        <div class="form-check radio-container">
+                            <input type="radio" id="marks10th" name="markstype10th" value="marks" class="form-check-input" onclick="toggleMarksFields('10th')" required>
+                            <label for="marks10th" class="form-check-label">Marks</label>
+                        </div>
+                        <div id="percentageField10th" class="hidden">
+                            <div class="form-group">
+                                <label for="percentageObtained10th">Percentage Obtained:</label>
+                                <input type="number" id="percentageObtained10th" name="percentageobtained10th" class="form-control" min="1" max="100" pattern="^(100|[1-9]?[0-9])$" title="Please enter a percentage between 1 and 100" required>
+                            </div>
+                        </div>
+                        <div id="marksField10th" class="hidden">
+                            <div class="form-group">
+                                <label for="marksObtained10th">Marks Obtained:</label>
+                                <input type="number" id="marksObtained10th" name="marksobtained10th" class="form-control" min="1" max="500" pattern="^[0-9]{1,3}$" title="Please enter marks between 1 and 500" required>    
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 12th Grade Marks Obtained -->
+                    <div class="form-section" id="12th">
+                        <h3 class="form-section-header">12th Details</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="schoolName12th">School Name:</label>
+                                    <input type="text" id="schoolName12th" name="12thschoolname" class="form-control" placeholder="Enter your school name" pattern="^[A-Za-z\s]{3,}$" title="Please enter a valid school name (only alphabets allowed, minimum 3 characters)" minlength="3" required>             
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="board12th">Board of Education:</label>
+                                    <select id="board12th" name="board12th" class="form-control" required>
+                                        <option value="" disabled selected>Select your board of education</option>
+                                        <option value="CBSE">CBSE (Central Board of Secondary Education)</option>
+                                        <option value="ICSE">ICSE (Indian Certificate of Secondary Education)</option>
+                                        <option value="Tamil Nadu State Board">Tamil Nadu State Board</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="startDate12th">Start Date:</label>
+                                    <input type="date" id="startDate12th" name="12thstartdate" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="endDate12th">End Date:</label>
+                                    <input type="date" id="endDate12th" name="12thenddate" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-check radio-container">
+                            <input type="radio" id="percentage12th" name="markstype12th" value="percentage" class="form-check-input" onclick="toggleMarksFields('12th')" required>
+                            <label for="percentage12th" class="form-check-label">Percentage</label>
+                        </div>
+                        <div class="form-check radio-container">
+                            <input type="radio" id="marks12th" name="markstype12th" value="marks" class="form-check-input" onclick="toggleMarksFields('12th')" required>
+                            <label for="marks12th" class="form-check-label">Marks</label>
+                        </div>
+                        <div id="percentageField12th" class="hidden">
+                            <div class="form-group">
+                                <label for="percentageObtained12th">Percentage Obtained:</label>
+                                <input type="number" id="percentageObtained12th" name="12thpercentage" class="form-control" min="1" max="100" pattern="^(100|[1-9]?[0-9])$" title="Please enter a percentage between 1 and 100">    
+                            </div>
+                        </div>
+                        <div id="marksField12th" class="hidden">
+                            <div class="form-group">
+                                <label for="marksObtained12th">Marks Obtained:</label>
+                                <input type="number" id="marksObtained12th" name="12thmark" class="form-control" min="1" max="1200" pattern="^[0-9]{1,3}$" title="Please enter marks between 1 and 1200">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-custom">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Initialize field visibility based on current selections
+        toggleEducationFields();
+        setupDateRestrictions();
+    });
+
+    // Form submission handling
+    document.getElementById('userDetailsForm').addEventListener('submit', function(event) {
+        event.preventDefault();  // Prevent default submission
+
+        // Collect form data
+        const formData = new FormData(this);
+
+        // Send form data to the server
+        fetch('jobfairregister', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Form submitted successfully!");
+                window.location.href = 'success';  // Redirect on success
+            } else {
+                alert("Error submitting the form: " + data.message + (data.error || ''));
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+    });
+
+    // Toggle visibility of education fields (Graduation vs Diploma)
+    function toggleEducationFields() {
+        const graduationFields = document.getElementById("graduationFields");
+        const diplomaFields = document.getElementById("diplomaFields");
+        const isGraduation = document.getElementById("graduation").checked;
+        const isDiploma = document.getElementById("diploma").checked;
+        const twelfthFields = document.getElementById("12th");
+
+
+        if (isGraduation) {
+            showFields(graduationFields);
+            hideFields(diplomaFields);
+            document.getElementById("12th").style.display = "block";
+        } else if (isDiploma) {
+            showFields(diplomaFields);
+            hideFields(graduationFields);
+            document.getElementById("12th").style.display = "none";
+            setRequiredAttributes(twelfthFields, false);  // Remove required attributes
+
+        }
+    }
+
+    // Helper function to show a set of fields
+    function showFields(container) {
+        container.classList.remove("hidden");
+        setRequiredAttributes(container, true);
+    }
+
+    // Helper function to hide a set of fields
+    function hideFields(container) {
+        container.classList.add("hidden");
+        setRequiredAttributes(container, false);
+    }
+
+    // Set required attribute for all inputs and selects within a container
+    function setRequiredAttributes(container, required) {
+        const inputs = container.querySelectorAll("input, select");
+        inputs.forEach(input => {
+            input.required = required;
+        });
+    }
+
+    // Toggle visibility of marks fields based on selection (Percentage vs Marks)
+    function toggleMarksFields(type) {
+        const percentageField = document.getElementById(`percentageField${type}`);
+        const marksField = document.getElementById(`marksField${type}`);
+        const selectedValue = document.querySelector(`input[name="markstype${type}"]:checked`).value;
+
+        if (selectedValue === "percentage") {
+            showMarksField(percentageField, marksField, `percentageObtained${type}`, `marksObtained${type}`);
+        } else if (selectedValue === "marks") {
+            showMarksField(marksField, percentageField, `marksObtained${type}`, `percentageObtained${type}`);
+        }
+    }
+
+    // Show one marks field and hide the other
+    function showMarksField(showField, hideField, showInputId, hideInputId) {
+        showField.classList.remove("hidden");
+        hideField.classList.add("hidden");
+        document.getElementById(showInputId).required = true;
+        document.getElementById(hideInputId).required = false;
+    }
+
+    // Set date restrictions for fields
+    function setupDateRestrictions() {
+        const today = new Date();
+        const eighteenYearsAgo = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+        const maxDate = today.toISOString().split("T")[0];
+
+        // Restrict DOB to be at least 18 years ago
+        document.getElementById("dob").max = eighteenYearsAgo.toISOString().split("T")[0];
+
+        // Set maximum allowed date to today's date for start and end fields
+        const dateFields = [
+            { start: "graduationStartDate", end: "graduationEndDate" },
+            { start: "startDate10th", end: "endDate10th" },
+            { start: "startDate12th", end: "endDate12th" },
+            { start: "diplomaStartDate", end: "diplomaEndDate" }
+        ];
+
+        dateFields.forEach(({ start, end }) => {
+            const startDateInput = document.getElementById(start);
+            const endDateInput = document.getElementById(end);
+
+            startDateInput.max = maxDate;
+            endDateInput.max = maxDate;
+
+            // Validate and adjust dates
+            startDateInput.addEventListener("change", () => {
+                validateStartDate(startDateInput, endDateInput);
+            });
+
+            endDateInput.addEventListener("change", () => {
+                validateEndDate(startDateInput, endDateInput);
+            });
+        });
+    }
+
+    // Validate start date and adjust minimum end date
+    function validateStartDate(startDateInput, endDateInput) {
+        const startDate = new Date(startDateInput.value);
+        if (startDate) {
+            const sixMonthsLater = new Date(startDate);
+            sixMonthsLater.setMonth(sixMonthsLater.getMonth() + 6);
+            endDateInput.min = sixMonthsLater.toISOString().split("T")[0];
+        }
+    }
+
+    // Validate end date to ensure it's after start date and at least 6 months later
+    function validateEndDate(startDateInput, endDateInput) {
+        const startDate = new Date(startDateInput.value);
+        const endDate = new Date(endDateInput.value);
+
+        if (startDate && endDate) {
+            const durationMonths = (endDate.getFullYear() - startDate.getFullYear()) * 12 + (endDate.getMonth() - startDate.getMonth());
+            if (endDate < startDate || durationMonths < 6) {
+                alert("End date must be at least 6 months after the start date and cannot be before the start date.");
+                endDateInput.value = ""; // Clear invalid input
+            }
+        }
+    }
+</script>
+    
+</body>
+</html>

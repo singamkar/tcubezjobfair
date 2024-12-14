@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Fair Details</title>
+    <style>
+        /* Base Styles */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #e6f7ff, #ffffff);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        .container {
+            background: #ffffff;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            animation: slideUp 1.2s ease-in-out;
+        }
+
+        header {
+            background-color: #0073e6;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .table-container {
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            animation: tableFadeIn 1.5s ease;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border: 1px solid #eaeaea;
+        }
+
+        th {
+            background-color: #0073e6;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        td {
+            background-color: #f9fbff;
+        }
+
+        tr:hover td {
+            background-color: #e3f2fd;
+        }
+
+        .btn {
+            display: inline-block;
+            margin: 20px auto;
+            text-decoration: none;
+            color: #ffffff;
+            background: #0073e6;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
+            transition: background 0.3s ease, transform 0.2s ease;
+            animation: buttonBounce 2s infinite;
+        }
+
+        .btn:hover {
+            background: #005bb5;
+            transform: scale(1.05);
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes tableFadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes buttonBounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            th, td {
+                font-size: 0.9rem;
+                padding: 10px;
+            }
+
+            header {
+                font-size: 1.5rem;
+            }
+
+            .btn {
+                font-size: 0.9rem;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>Job Fair Details</header>
+        <div class="table-container">
+    <table>
+        <tr>
+            <th>Name:</th>
+            <td>{{ jobfair.Registration.name }}</td>
+        </tr>
+        <tr>
+            <th>Email:</th>
+            <td>{{ jobfair.email }}</td>
+        </tr>
+        <tr>
+            <th>Gender:</th>
+            <td>{{ jobfair.gender }}</td>
+        </tr>
+        <tr>
+            <th>Father's Name:</th>
+            <td>{{ jobfair.father_name }}</td>
+        </tr>
+        <tr>
+            <th>Mother's Name:</th>
+            <td>{{ jobfair.mother_name }}</td>
+        </tr>
+        <tr>
+            <th>Address:</th>
+            <td>{{ jobfair.address }}</td>
+        </tr>
+
+        <!-- Graduation Details -->
+        {% if jobfair.education_level == "graduation" %}
+        <tr>
+            <th>Education Level:</th>
+            <td>{{ jobfair.education_level }}</td>
+        </tr>
+        <tr>
+            <th>Degree:</th>
+            <td>{{ jobfair.degree }}</td>
+        </tr>
+        <tr>
+            <th>Institute Name:</th>
+            <td>{{ jobfair.institute_name }}</td>
+        </tr>
+        <tr>
+            <th>Degree Start Date:</th>
+            <td>{{ jobfair.degree_start_date }}</td>
+        </tr>
+        <tr>
+            <th>Degree End Date:</th>
+            <td>{{ jobfair.degree_end_date }}</td>
+        </tr>
+        <tr>
+            <th>Degree Percentage:</th>
+            <td>{{ jobfair.degree_percentage }}</td>
+        </tr>
+        {% endif %}
+
+        <!-- Diploma Details -->
+        {% if jobfair.education_level == "diploma" %}
+        <tr>
+            <th>Diploma Name:</th>
+            <td>{{ jobfair.diploma_name }}</td>
+        </tr>
+        <tr>
+            <th>Diploma Institute:</th>
+            <td>{{ jobfair.diploma_institute_name }}</td>
+        </tr>
+        <tr>
+            <th>Diploma Start Date:</th>
+            <td>{{ jobfair.diploma_start_date }}</td>
+        </tr>
+        <tr>
+            <th>Diploma End Date:</th>
+            <td>{{ jobfair.diploma_end_date }}</td>
+        </tr>
+        <tr>
+            <th>Diploma Percentage:</th>
+            <td>{{ jobfair.diploma_percentage }}</td>
+        </tr>
+        {% endif %}
+
+        <!-- 10th Grade Details -->
+        <tr>
+            <th>10th School Name:</th>
+            <td>{{ jobfair.school_name_10th }}</td>
+        </tr>
+        <tr>
+            <th>10th Board:</th>
+            <td>{{ jobfair.board_10th }}</td>
+        </tr>
+        <tr>
+            <th>10th Start Date:</th>
+            <td>{{ jobfair.start_date_10th }}</td>
+        </tr>
+        <tr>
+            <th>10th End Date:</th>
+            <td>{{ jobfair.end_date_10th }}</td>
+        </tr>
+        {% if jobfair.percentage_10th %}
+        <tr>
+            <th>10th Percentage:</th>
+            <td>{{ jobfair.percentage_10th }}</td>
+        </tr>
+        {% endif %}
+        {% if jobfair.marks_10th %}
+        <tr>
+            <th>10th Marks:</th>
+            <td>{{ jobfair.marks_10th }}</td>
+        </tr>
+        {% endif %}
+
+        <!-- 12th Grade Details -->
+        <tr>
+            <th>12th School Name:</th>
+            <td>{{ jobfair.school_name_12th }}</td>
+        </tr>
+        <tr>
+            <th>12th Board:</th>
+            <td>{{ jobfair.board_12th }}</td>
+        </tr>
+        <tr>
+            <th>12th Start Date:</th>
+            <td>{{ jobfair.start_date_12th }}</td>
+        </tr>
+        <tr>
+            <th>12th End Date:</th>
+            <td>{{ jobfair.end_date_12th }}</td>
+        </tr>
+        {% if jobfair.percentage_12th %}
+        <tr>
+            <th>12th Percentage:</th>
+            <td>{{ jobfair.percentage_12th }}</td>
+        </tr>
+        {% endif %}
+        {% if jobfair.marks_12th %}
+        <tr>
+            <th>12th Marks:</th>
+            <td>{{ jobfair.marks_12th }}</td>
+        </tr>
+        {% endif %}
+
+        <!-- Username and Password -->
+        <tr>
+            <th>Username:</th>
+            <td>{{ jobfair.email }}</td>
+        </tr>
+        <tr>
+            <th>Password:</th>
+            <td>{{ jobfair.password }}</td>
+        </tr>
+    </table>
+    <a href="{% url 'admin_page' %}" class="btn">Back to Admin Page</a>
+</div>
+<footer>&copy; 2024 Job Fair. All Rights Reserved.</footer>
+</div>
+</body>
+</html>

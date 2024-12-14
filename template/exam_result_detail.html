@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Result Details</title>
+    <style>
+        /* Base Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Card Styling */
+        .container {
+            background: #ffffff;
+            padding: 40px 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin: 12px 0;
+            color: #555555;
+        }
+
+        p strong {
+            color: #2c3e50;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #ffffff;
+            background-color: #3498db;
+            text-decoration: none;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        /* Footer Styling */
+        .footer {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #777777;
+        }
+
+        .footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                font-size: 0.9rem;
+                padding: 10px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Content -->
+    <div class="container">
+        <h2>Exam Result Details</h2>
+        <p><strong>Name:</strong> {{ result.Registration.name }}</p>
+        <p><strong>Email:</strong> {{ result.Registration.email }}</p>
+        <p><strong>Marks:</strong> {{ result.marks }}</p>
+        <p><strong>Status:</strong> {{ result.status }}</p>
+        {% if result.company != 'none' %}
+        <p><strong>Company:</strong> {{ result.company }}</p>
+        {% endif %}
+        <a href="{% url 'admin_page' %}" class="btn">Back to Admin</a>
+        <div class="footer">
+            <p>&copy; 2024 <a href="#">Your Company</a>. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

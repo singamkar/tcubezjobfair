@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Form</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery, Popper.js, and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+        body {
+            background-color: #08005e;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-image: url("{% static 'assets/images/bg.JPEG' %}");
+            background-size: cover;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .buttoncontainer {
+            display: flex;
+            justify-content: center;
+            margin-top: 180px;
+        }
+
+        .buttoncontainer button {
+            padding: 15px 30px;
+            font-size: 16px;
+        }
+        
+        .card-img-top{
+            height:150px;
+            width: 150px;
+            margin-left: 60px;
+            padding: 20px;
+        }
+        .btn-orange {
+            background-color: #11565c;
+            border-color: #11565c;
+            color: white;
+        }
+
+        .btn-orange:hover {
+            background-color: #f9c845;
+            border-color: #f9c845;
+        }
+        .card{
+            border: 1px solid orange;
+            box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+        }
+        #existingStudentBtn{
+            margin-right: 10px;
+        }
+        @media (max-width: 575.98px) {
+            .buttoncontainer {
+                flex-direction: column;
+                margin-top: 100px;
+            }
+
+            .card {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .card-img-top {
+                height: 100px;
+                width: 100px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .btn-orange {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+
+            .modal-dialog {
+                width: 90%;
+                margin: auto;
+            }
+        }
+
+        /* Tablets (Landscape) and Small Laptops */
+        @media (min-width: 576px) and (max-width: 991.98px) {
+            .buttoncontainer {
+                margin-top: 150px;
+            }
+
+            .card {
+                width: 80%;
+                margin: 10px auto;
+            }
+
+            .card-img-top {
+                height: 120px;
+                width: 120px;
+            }
+
+            .btn-orange {
+                font-size: 16px;
+                padding: 12px 25px;
+            }
+
+            .modal-dialog {
+                width: 70%;
+            }
+        }
+
+        /* Laptops and Desktops */
+        @media (min-width: 992px) {
+            .buttoncontainer {
+                margin-top: 180px;
+            }
+
+            .card {
+                width: 18rem;
+            }
+
+            .card-img-top {
+                height: 150px;
+                width: 150px;
+                margin-left: 60px;
+            }
+
+            .btn-orange {
+                font-size: 18px;
+                padding: 15px 30px;
+            }
+
+            .modal-dialog {
+                width: 50%;
+            }
+        }
+    </style>
+</head>
+<body>
+    {% if messages %}
+        <div class="container mt-3">
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="buttoncontainer">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card text-center" style="width: 18rem;">
+                    <img class="card-img-top" src="{% static 'assets/images/newstudent.png' %}" alt="New Student">
+                    <div class="card-body">
+                        <a href="{% url 'personal_1' %}" style="text-decoration: none;">
+                            <button id="newStudentBtn" class="btn btn-orange btn-block">New Student</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card text-center" style="width: 18rem;">
+                    <img class="card-img-top" src="{% static 'assets/images/existingstudent.png' %}" alt="Existing Student">
+                    <div class="card-body">
+                        <button id="existingStudentBtn" class="btn btn-orange btn-block" data-toggle="modal" data-target="#loginModal">Existing Student</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal -->
+    
+    <!-- Existing Student Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Existing Student Login</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="userId">User ID:</label>
+                        <input type="text" id="userId" name="userId" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-orange">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+
+            loginForm.addEventListener('submit', function(e) {
+                // Optional: Custom client-side validation before form submission
+                const userId = document.getElementById('userId').value;
+                const password = document.getElementById('password').value;
+
+                // Basic check if fields are empty, if needed
+                if (!userId || !password) {
+                    alert("Please fill in both fields.");
+                    e.preventDefault();
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

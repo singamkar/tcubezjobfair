@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Form</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f9f9f9;
+            background: url("{% static 'assets/images/college.jpg' %}") no-repeat center fixed;
+            background-size: 100% auto;
+        }
+        .form-title {
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .tab-content {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .form-section {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #fafafa;
+            margin-bottom: 20px;
+        }
+        .section-title {
+            background: #004080;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px 5px 0 0;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="form-title">College Form Details</h2>
+    
+        <!-- Tab Navigation -->
+        <ul class="nav nav-tabs" id="formTabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="college-details-tab" data-toggle="tab" href="#college-details" role="tab" aria-controls="college-details" aria-selected="true">College Details</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="principal-details-tab" data-toggle="tab" href="#principal-details" role="tab" aria-controls="principal-details" aria-selected="false">Principal Details</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="placement-details-tab" data-toggle="tab" href="#placement-details" role="tab" aria-controls="placement-details" aria-selected="false">Placement Officer Details</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="department-details-tab" data-toggle="tab" href="#department-details" role="tab" aria-controls="department-details" aria-selected="false">Department & Students Details</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="contact-details-tab" data-toggle="tab" href="#contact-details" role="tab" aria-controls="contact-details" aria-selected="false">Contact Details</a>
+            </li>
+        </ul>
+    
+        <!-- Tab Content -->
+        <div class="tab-content" id="formTabsContent">
+            <!-- College Details Section -->
+            <div class="tab-pane fade show active" id="college-details" role="tabpanel" aria-labelledby="college-details-tab">
+                <div class="form-section">
+                    <div class="section-title">College Details</div>
+                    <p><strong>College Name:</strong> <span id="previewCollegeName">{{ college.college_name }}</span></p>
+                    <p><strong>College Location:</strong> <span id="previewCollegeLocation">{{ college.college_location }}</span></p>
+                    <p><strong>Stream:</strong> <span id="previewStream">{{ college.college_stream }}</span></p>
+                    <p><strong>College Type:</strong> <span id="previewCollegeType">{{ college.college_type }}</span></p>
+                    <p><strong>NAAC Accreditation:</strong> <span id="previewNaacAccreditation">{{ college.naac_accreditation }}</span></p>
+                </div>
+            </div>
+    
+            <!-- Principal Details Section -->
+            <div class="tab-pane fade" id="principal-details" role="tabpanel" aria-labelledby="principal-details-tab">
+                <div class="form-section">
+                    <div class="section-title">Principal Details</div>
+                    <p><strong>Principal's Name:</strong> <span id="previewPrincipalName">{{ college.principal_name }}</span></p>
+                    <p><strong>Principal's Number:</strong> <span id="previewPrincipalNumber">{{ college.principal_number }}</span></p>
+                    <p><strong>Principal's Email:</strong> <span id="previewPrincipalEmail">{{ college.principal_email }}</span></p>
+                </div>
+            </div>
+    
+            <!-- Placement Officer Details Section -->
+            <div class="tab-pane fade" id="placement-details" role="tabpanel" aria-labelledby="placement-details-tab">
+                <div class="form-section">
+                    <div class="section-title">Placement Officer Details</div>
+                    <p><strong>Placement Officer's Name:</strong> <span id="previewPlacementOfficerName">{{ college.placement_officer_name }}</span></p>
+                    <p><strong>Placement Officer's Number:</strong> <span id="previewPlacementOfficerNumber">{{ college.placement_officer_Number }}</span></p>
+                    <p><strong>Placement Officer's Email:</strong> <span id="previewPlacementOfficerEmail">{{ college.placement_officer_email }}</span></p>
+                </div>
+            </div>
+    
+            <!-- Department & Students Details Section -->
+            <div class="tab-pane fade" id="department-details" role="tabpanel" aria-labelledby="department-details-tab">
+                <div class="form-section">
+                    <div class="section-title">Department & Students Details</div>
+                    <p><strong>Number of Departments:</strong> <span id="previewDepartments">{{ college.number_of_dept }}</span></p>
+                    <p><strong>Total UG Students:</strong> <span id="previewTotalStudentsUG">{{ college.ug_students }}</span></p>
+                    <p><strong>Total PG Students:</strong> <span id="previewTotalStudentsPG">{{ college.pg_students }}</span></p>
+                </div>
+            </div>
+    
+            <!-- Contact Details Section -->
+            <div class="tab-pane fade" id="contact-details" role="tabpanel" aria-labelledby="contact-details-tab">
+                <div class="form-section">
+                    <div class="section-title">Contact Details</div>
+                    <p><strong>College Email:</strong> <span id="previewCollegeMail">{{ college.collegeMail }}</span></p>
+                    <p><strong>College Number:</strong> <span id="previewCollegeNumber">{{ college.collegeNumber }}</span></p>
+                    <p><strong>College Type:</strong> <span id="previewCollegeType">{{ college.college_type }}</span></p>
+                </div>
+            </div>
+    
+            <!-- Back Button -->
+            <div class="text-center">
+                <a href="{% url 'home' %}" class="btn btn-outline-primary btn-lg px-5"><i class="fas fa-arrow-left"></i> Back to Home</a>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

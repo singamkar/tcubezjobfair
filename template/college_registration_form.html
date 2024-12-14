@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Registration</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    {% load static %}
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-image: url("{% static 'assets/images/bg2.JPEG' %}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            font-weight: bold;
+            color: #007bff;
+        }
+        .form-group label {
+            font-weight: bold; 
+            color: #333;
+        }
+        .form-control {
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            transition: border-color 0.3s ease;
+        }
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
+        }
+        .btn-blue {
+            background-color: #007bff; 
+            border-color: #007bff;
+            color: white;
+            font-weight: bold; 
+            border-radius: 5px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .btn-blue:hover {
+            background-color: #0056b3; 
+            border-color: #0056b3;
+        }
+        .form-control::placeholder {
+            color: #999; 
+        }
+        .row{
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2 class="text-center">New College Registration</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="row">
+                <!-- Left Side -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="collegeName">College Name:</label>
+                        <input type="text" id="collegeName" name="collegeName" class="form-control"
+                               pattern="^(?!.* {4,})[A-Za-z\s]{3,}$" minlength="3"
+                               title="College Name must be at least 3 characters long and cannot contain more than three whitespaces."
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="district">District</label>
+                        <select id="district" name="district" class="form-control" required>
+                            <option value="">Select</option>
+                            <!-- District options -->
+                            <option value="Ariyalur">Ariyalur</option>
+                            <option value="Chennai">Chennai</option>
+                            <option value="Coimbatore">Coimbatore</option>
+                            <option value="Cuddalore">Cuddalore</option>
+                            <option value="Dharmapuri">Dharmapuri</option>
+                            <option value="Dindigul">Dindigul</option>
+                            <option value="Erode">Erode</option>
+                            <option value="Kanchipuram">Kanchipuram</option>
+                            <option value="Karur">Karur</option>
+                            <option value="Krishnagiri">Krishnagiri</option>
+                            <option value="Madurai">Madurai</option>
+                            <option value="Nagapattinam">Nagapattinam</option>
+                            <option value="Namakkal">Namakkal</option>
+                            <option value="Perambalur">Perambalur</option>
+                            <option value="Pudukkottai">Pudukkottai</option>
+                            <option value="Ramanathapuram">Ramanathapuram</option>
+                            <option value="Salem">Salem</option>
+                            <option value="Sivaganga">Sivaganga</option>
+                            <option value="Thanjavur">Thanjavur</option>
+                            <option value="Theni">Theni</option>
+                            <option value="Thoothukudi">Thoothukudi</option>
+                            <option value="Tiruchirappalli">Tiruchirappalli</option>
+                            <option value="Tirunelveli">Tirunelveli</option>
+                            <option value="Tiruppur">Tiruppur</option>
+                            <option value="Tiruvallur">Tiruvallur</option>
+                            <option value="Tiruvannamalai">Tiruvannamalai</option>
+                            <option value="Tiruvarur">Tiruvarur</option>
+                            <option value="Vellore">Vellore</option>
+                            <option value="Viluppuram">Viluppuram</option>
+                            <option value="Virudhunagar">Virudhunagar</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="collegeLocation">College Location:</label>
+                        <input type="text" id="collegeLocation" name="collegelocation" class="form-control"
+                               pattern="^(?!.* {4,})[A-Za-z\s]{3,}$" minlength="3"
+                               title="College Location must be at least 3 characters long and cannot contain more than three whitespaces."
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stream">College Stream:</label>
+                        <select id="stream" name="stream" class="form-control" required>
+                            <option value="">Select</option>
+                            <option value="Arts">Arts</option>
+                            <option value="Engineering">Engineering</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="collegeType">College To Be:</label>
+                        <select id="collegeType" name="collegeto" class="form-control" required>
+                            <option value="">Select</option>
+                            <option value="autonomous">Autonomous</option>
+                            <option value="university">University</option>
+                            <option value="affiliated">Affiliated</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="collegeType">College Type:</label>
+                        <select id="collegeType" name="college_type" class="form-control" required>
+                            <option value="">Select</option>
+                            <option value="Womens">Womens</option>
+                            <option value="co-Education">co-Education</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="naacAccreditation">NAAC Accreditation:</label>
+                        <select id="naacAccreditation" name="naacacreadation" class="form-control" required>
+                            <option value="">-- Select Accreditation --</option>
+                            <option value="A++">A++</option>
+                            <option value="A+">A+</option>
+                            <option value="A">A</option>
+                            <option value="B++">B++</option>
+                            <option value="B+">B+</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="Not Accredited">Not Accredited</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="collegeEmail">College Email:</label>
+                        <input type="email" id="collegeEmail" name="collegeMail" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="collegePhone">College Phone Number:</label>
+                        <input type="tel" id="collegePhone" name="collegeNumber" class="form-control" pattern="^[6-9]\d{9}$" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="departments">Number of Departments:</label>
+                        <input type="number" id="departments" name="departments" class="form-control" min="1" max="100" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="totalStudentsUG">Total Students (UG):</label>
+                        <input type="number" id="totalStudentsUG" name="totalStudentsUG" class="form-control" min="1" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="totalStudentsPG">Total Students (PG):</label>
+                        <input type="number" id="totalStudentsPG" name="totalStudentsPG" class="form-control" min="1" required>
+                    </div>
+                </div>
+
+                <!-- Right Side -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="principalName">Principal Name:</label>
+                        <input type="text" id="principalName" name="principalName" class="form-control"
+                        pattern="^(?!.* {4,})[A-Za-z\s]{3,}$" minlength="3"
+                        title="Principal Name must be at least 3 characters long and cannot contain more than three whitespaces."
+                        required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="principalNumber">Principal Contact Number:</label>
+                        <input type="tel" id="principalNumber" name="principalNumber" class="form-control" pattern="^[6-9]\d{9}$" title="Please enter a valid 10-digit number." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="principalEmail">Principal Email:</label>
+                        <input type="email" id="principalEmail" name="principalMail" class="form-control" 
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
+                        title="Enter a valid email address." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="placementOfficerName">Placement Officer Name:</label>
+                        <input type="text" id="placementOfficerName" name="placementOfficerName" class="form-control" 
+                        pattern="^(?!.* {4,})[A-Za-z\s]{3,}$" minlength="3" 
+                        title="Placement Officer Name must contain only letters and spaces and cannot contain more than three whitespaces." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="placementOfficerNumber">Placement Officer Number:</label>
+                        <input type="tel" id="placementOfficerNumber" name="placementOfficerNumber" class="form-control" pattern="^[6-9]\d{9}$" title="Enter a valid 10-digit number." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="placementOfficerEmail">Placement Officer Email:</label>
+                        <input type="email" id="placementOfficerEmail" name="placementOfficerMail" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-blue btn-block">Submit</button>
+        </form>
+    </div>
+
+</body>
+</html>

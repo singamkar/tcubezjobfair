@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aptitude Exam</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .options {
+            margin-left: 20px;
+        }
+        #timer {
+            font-size: 20px;
+            font-weight: bold;
+            color: red;
+        }
+        .hidden { display: none; } /* Hide elements after form submission */
+    </style>
+</head>
+<body>
+    <h1>Aptitude Examination</h1>
+    <h1>Welcome, {{ user.name }}</h1>
+    <p>Your department: <strong>{{ department }}</strong></p>
+    <p>Welcome, {{ username }}!</p>
+    {{ jobfair_login. }}
+
+
+    <!-- Timer Display -->
+    <div id="timer">Time left: 30:00</div>
+
+    <!-- Questions Form -->
+    {% if questions %}
+        <form id="exam-form" action="{% url 'submit_exam' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="department" value="{{ department }}">
+            <input type="hidden" name="user" value="{{ user.name }}">
+            <input type="hidden" name="username" value="{{ username }}">
+
+            <!-- Display Questions -->
+            {% for question in questions %}
+                <div class="question">
+                    <p><strong>Q{{ forloop.counter }}: {{ question.question_text }}</strong></p>
+                    <div class="options">
+                        <input type="radio" name="q{{ forloop.counter }}" value="{{ question.option_a }}" required> {{ question.option_a }}<br>
+                        <input type="radio" name="q{{ forloop.counter }}" value="{{ question.option_b }}"> {{ question.option_b }}<br>
+                        <input type="radio" name="q{{ forloop.counter }}" value="{{ question.option_c }}"> {{ question.option_c }}<br>
+                        <input type="radio" name="q{{ forloop.counter }}" value="{{ question.option_d }}"> {{ question.option_d }}<br>
+                    </div>
+                </div>
+            {% endfor %}
+
+            <!-- Submit Button -->
+            <button type="submit">Submit Exam</button>
+        </form>
+    {% else %}
+        <p>No questions available for the selected department.</p>
+    {% endif %}
+
+    <script>
+        // Timer logic
+        var timeLeft = 30 * 60; // 30 minutes in seconds
+        var formElement = document.getElementById('exam-form');
+        var timerElement = document.getElementById('timer');
+    
+        // Function to format time as MM:SS
+        function formatTime(seconds) {
+            var minutes = Math.floor(seconds / 60);
+            var secondsRemaining = seconds % 60;
+            return minutes.toString().padStart(2, '0') + ':' + secondsRemaining.toString().padStart(2, '0');
+        }
+    
+        // Update the timer every second
+        var timerInterval = setInterval(function() {
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                formElement.submit(); // Automatically submit the form when time is up
+            } else {
+                timeLeft--;
+                timerElement.textContent = "Time left: " + formatTime(timeLeft);
+            }
+        }, 1000);
+    
+        // Prevent page refresh or navigation during the exam
+        window.onbeforeunload = function() {
+            return "You have an exam in progress. Are you sure you want to leave?";
+        };
+    
+        // Disable the onbeforeunload warning after submission
+        if (formElement) {
+            formElement.addEventListener('submit', function() {
+                window.onbeforeunload = null; // Allow the page to unload after submission
+            });
+        }
+    
+        // Automatically submit the form when the tab is switched
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                formElement.submit(); // Submit the form if the tab is hidden
+            }
+        });
+    </script>
+    
+</body>
+</html>

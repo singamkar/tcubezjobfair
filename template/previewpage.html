@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview Personal Details</title>
+
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #343a40;
+        }
+
+        .card {
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #007bff;
+            color: #fff;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .card-body p {
+            font-size: 1rem;
+            margin: 0.5rem 0;
+        }
+
+        .btn-secondary {
+            background-color: #343a40;
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: #495057;
+        }
+
+        .container {
+            max-width: 900px;
+        }
+
+        hr {
+            border-top: 1px dashed #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Preview Personal Details</h1>
+
+        <!-- Personal Information Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-user"></i> Personal Information
+            </div>
+            <div class="card-body">
+                <p><strong>Name:</strong> {{ personal_details.name }}</p>
+                <p><strong>Aadhar Number:</strong> {{ personal_details.aadhar_num }}</p>
+                <p><strong>PAN Number:</strong> {{ personal_details.pan_num }}</p>
+                <p><strong>Email:</strong> {{ personal_details.email }}</p>
+                <p><strong>Gender:</strong> {{ personal_details.gender }}</p>
+                <p><strong>Father's Name:</strong> {{ personal_details.father_name }}</p>
+                <p><strong>Mother's Name:</strong> {{ personal_details.mother_name }}</p>
+                <p><strong>Address:</strong> {{ personal_details.address }}</p>
+            </div>
+        </div>
+
+        <!-- Education Details Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-graduation-cap"></i> Education Details
+            </div>
+            <div class="card-body">
+                <h5 class="text-primary">Graduation</h5>
+                <p><strong>Degree:</strong> {{ personal_details.degree }}</p>
+                <p><strong>Institute Name:</strong> {{ personal_details.institute_name }}</p>
+                <p><strong>Start Date:</strong> {{ personal_details.degree_start_date }}</p>
+                <p><strong>End Date:</strong> {{ personal_details.degree_end_date }}</p>
+                <p><strong>Percentage:</strong> {{ personal_details.degree_percentage }}</p>
+                
+                <hr>
+                {% if personal_details.diploma_name  %}
+                <h5 class="text-primary">Diploma</h5>
+                <p><strong>Diploma Name:</strong> {{ personal_details.diploma_name }}</p>
+                <p><strong>Institute Name:</strong> {{ personal_details.diploma_institute_name }}</p>
+                <p><strong>Start Date:</strong> {{ personal_details.diploma_start_date }}</p>
+                <p><strong>End Date:</strong> {{ personal_details.diploma_end_date }}</p>
+                <p><strong>Percentage:</strong> {{ personal_details.diploma_percentage }}</p>
+                {% endif %}
+
+                <hr>
+                {% if personal_details.school_name_10th %}
+                <h5 class="text-primary">10th Grade</h5>
+                <p><strong>School Name:</strong> {{ personal_details.school_name_10th }}</p>
+                <p><strong>Board:</strong> {{ personal_details.board_10th }}</p>
+                <p><strong>Start Date:</strong> {{ personal_details.start_date_10th }}</p>
+                <p><strong>End Date:</strong> {{ personal_details.end_date_10th }}</p>
+                {% if personal_details.percentage_10th %}
+                <p><strong>Percentage:</strong> {{ personal_details.percentage_10th }}</p>
+                {% else %}
+                <p><strong>Marks:</strong> {{ personal_details.marks_10th }}</p>
+                {% endif %}
+                {% endif %}
+
+                <hr>
+                {% if personal_details.school_name_12th %}
+                <h5 class="text-primary">12th Grade</h5>
+                <p><strong>School Name:</strong> {{ personal_details.school_name_12th }}</p>
+                <p><strong>Board:</strong> {{ personal_details.board_12th }}</p>
+                <p><strong>Start Date:</strong> {{ personal_details.start_date_12th }}</p>
+                <p><strong>End Date:</strong> {{ personal_details.end_date_12th }}</p>
+                {% if personal_details.percentage_12th %}
+                <p><strong>Percentage:</strong> {{ personal_details.percentage_12th }}</p>
+                {% else %}
+                <p><strong>Marks:</strong> {{ personal_details.marks_12th }}</p>
+                {% endif %}
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Account Information Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-user-circle"></i> Account Information
+            </div>
+            <div class="card-body">
+                <p><strong>Username:</strong> {{ personal_details.email }}</p>
+                <p><strong>Status:</strong> {{ personal_details.status }}</p>
+                <p><strong>Company:</strong> {{ personal_details.company }}</p>
+            </div>
+        </div>
+
+        <!-- Additional Information Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-info-circle"></i> Additional Information
+            </div>
+            <div class="card-body">
+                <p><strong>Marks:</strong> {{ personal_details.marks }}</p>
+                <p><strong>Department:</strong> {{ personal_details.department }}</p>
+            </div>
+        </div>
+
+        <!-- Back to Home Button -->
+        <div class="text-center">
+            <a href="#" class="btn btn-secondary" id="download-pdf">
+                Download
+            </a>
+        </div>
+        
+    </div>
+
+    <!-- Bootstrap 5 JS and Font Awesome -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+    <script>
+        document.getElementById('download-pdf').addEventListener('click', async function (e) {
+            e.preventDefault();
+
+            // Select the download button and hide it temporarily
+            const downloadButton = document.getElementById('download-pdf');
+            downloadButton.style.display = 'none';
+
+            // Generate the PDF
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF('p', 'pt', 'a4'); // Portrait mode, point units, A4 size
+            const element = document.querySelector('.container');
+
+            // Use html2canvas to capture the element
+            await html2canvas(element, { scale: 2 }).then((canvas) => {
+                const imgData = canvas.toDataURL('image/png');
+                const imgWidth = 595.28; // A4 width in points
+                const pageHeight = 841.89; // A4 height in points
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+                // Scale down content to fit within one page
+                const scaledHeight = imgHeight > pageHeight ? pageHeight - 40 : imgHeight; // Allow 20pt padding
+                pdf.addImage(imgData, 'PNG', 10, 10, imgWidth - 20, scaledHeight);
+
+                // Save the PDF
+                const fileName = '{{ personal_details.name|default:"Personal_Details" }}_Details.pdf';
+                pdf.save(fileName);
+            });
+
+            // Restore the visibility of the download button
+            downloadButton.style.display = 'block';
+        });
+
+    </script>
+
+
+
+
+    
+
+</body>
+</html>

@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE HR Company - Application Form</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery, Popper.js, and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            background-image: url("{% static 'assets/images/bg2.JPEG' %}");
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            background-attachment: fixed;
+            overflow: hidden;
+        }
+        .container::-webkit-scrollbar {
+        display: none;
+        }
+
+        .container {
+        scrollbar-width: none;
+        max-width: 1320px;
+        height: 85vh; 
+        padding: 30px;
+        background-color: white;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        overflow-y: auto;
+        }
+
+        .tcs-header {
+            background-color: #0056a3;
+            padding: 20px;
+            color: white;
+            font-size: 28px;
+            text-align: center;
+        }
+
+        .navbar {
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            padding: 10px;
+        }
+        .navbar a {
+            color: #000;
+            margin-right: 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .navbar a.active {
+            color: #0094cf;
+        }
+
+        .form-container {
+            margin-top: 20px;
+            background-color: white;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-header {
+            background-color: #f8f9fa;
+            padding: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .form-section-header {
+            background-color: #f0f0f0;
+            padding: 10px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .instruction-section {
+            margin-top: 20px;
+        }
+
+        .instructions-header {
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .instructions-list {
+            color: #007bff;
+            list-style-type: decimal;
+            padding-left: 20px;
+        }
+
+        .instructions-list li {
+            margin-bottom: 10px;
+            color: #333; 
+        }
+
+        .submit-btn {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .btn-continue {
+            background-color: #f4476b;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        .form-link {
+            display: block;
+            margin-bottom: 10px;
+            text-decoration: none;
+        }
+
+        .form-label {
+            font-weight: bold;
+            display: inline-block;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1320px;
+            margin-top:22px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        label {
+            
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            border-radius: 5px;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        table th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .buttons button {
+            padding: 10px 20px;
+            margin-right: 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .buttons button:hover {
+            background-color: #0056b3;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 450px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        .popup h2 {
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .popup input, .popup select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .popup .radio-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        .popup .radio-group input {
+            margin-right: 5px;
+        }
+
+        .popup button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .popup button:hover {
+            background-color: #0056b3;
+        }
+
+        #popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <div class="tcs-header">
+        <span>THE HR Company</span>
+    </div>
+
+    <!-- Form Container -->
+    <div class="container form-container">
+        {% if messages %}
+            <div class=" mt-3">
+                {% for message in messages %}
+                    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %} alert-dismissible fade show" role="alert" style="color: white; background-color: red;padding: 20px;width: 1000px;margin-left: 100px;">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <!-- Application Form Header -->
+        <div class="form-header">
+            <h3>Application Form</h3>
+        </div>
+
+        <!-- Navbar Section -->
+        <div class="navbar">
+            <a href="{% url 'personal_1' %}">Personal Details</a>
+            <a href="{% url 'academic' %}" class="active">Academic and Work Experience Details</a>
+            <a href="{% url 'other_details' %}">Other Details</a>
+            <a href="{% url 'preview' %}">Application Form Preview and Declaration</a>
+        </div>
+        <!-- Instructions and Form Sections -->
+        <div class="row">
+            <!-- Form Section (Left Side) -->
+            <div class="col-md-6">
+                <div class="form-section-header">Academic Details</div>
+                
+                <div class="mb-3">
+                    <a href="{% url 'academic' %}" class="form-link">
+                        <label for="qualification" class="form-label" >Instructions</label>
+                    </a>
+                </div>
+
+                <div class="mb-3">
+                    <a href="{% url 'academic_qualification' %}" class="form-link">
+                        <label for="qualification" class="form-label">Highest Qualification category Details</label>
+                    </a>
+                </div>
+
+                <div class="mb-3">
+                    <a href="{% url 'academic_graduate' %}" class="form-link">
+                        <label for="gradeX" class="form-label">Graduate</label>
+                    </a>
+                </div>
+
+                <div class="mb-3">
+                    <a href="{% url 'academic_xii_grade' %}" class="form-link">
+                        <label for="gradeXII" class="form-label">XII Grade Equivalent Diploma</label>
+                    </a>
+                </div>
+
+                <div class="mb-3">
+                    <a href="{% url 'academic_x_grade' %}" class="form-link">
+                        <label for="gradeX" class="form-label">X Grade</label>
+                    </a>
+                </div>
+
+                <div class="mb-3">
+                    <a href="{% url 'other_qualificaion' %}" class="form-link">
+                        <label for="workExperience" class="form-label">Any Other Qualification</label>
+                    </a>
+                </div>
+
+                <div class="mb-3">
+                    <a href="{% url 'work_exp' %}" class="form-link">
+                        <label for="workExperience" class="form-label" style="color: black;">Work Experience Details</label>
+                    </a>
+                </div>
+
+                <div class="mb-3">
+                    <a href="{% url 'arrear' %}" class="form-link">
+                        <label for="workExperience" class="form-label">Arrears</label>
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Form Section (Right Side) -->
+            
+            <div class="col-md-6">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="container form-container">
+                        <div class="form-group">
+                            <label class="form-label">Do you have any work experience?</label>
+                            <div class="radio-group">
+                                <div class="radio-item">
+                                    <input type="radio" required name="have_experience" value="no" onclick="toggleExperience('no');" id="noOtherCourse"
+                                    {% if work_experience_data.have_experience == "no" %}checked{% endif %}>
+                                    <label for="noOtherCourse">No</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" required name="have_experience" value="yes" onclick="toggleExperience('yes');" id="yesOtherCourse"
+                                    {% if work_experience_data.have_experience == "yes" %}checked{% endif %}>
+                                    <label for="yesOtherCourse">Yes</label>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <!-- Work Experience Details Section -->
+                        <div id="workExperience" style="display: none;">
+                            <h5>Work Experience Details</h5>
+            
+                            <!-- Company Name Field -->
+                            <div class="form-group">
+                                <label for="name" class="form-label">Company Name:</label>
+                                <input type="text" required id="name" name="name" class="form-control" placeholder="Enter company name" oninput="validateInput(this)"
+                                value="{{ work_experience_data.company_name }}">
+                            </div>
+            
+                            <!-- Employee Type Field -->
+                            <div class="form-group">
+                                <label for="employee_type" class="form-label">Employee Type:</label>
+                                <select required id="employee_type" name="employee_type" class="form-control">
+                                    <option value="">Select employee type</option>
+                                    <option value="full-time" {% if work_experience_data.employee_type == "full-time" %}selected{% endif %}>Full Time</option>
+                                    <option value="part-time" {% if work_experience_data.employee_type == "part-time" %}selected{% endif %}>Part Time</option>
+                                    <option value="contract" {% if work_experience_data.employee_type == "contract" %}selected{% endif %}>Contract</option>
+                                </select>
+                            </div>
+            
+                            <!-- Duration Fields -->
+                            <div class="form-group">
+                                <label for="duration_from" class="form-label">Duration From:</label>
+                                <input type="date" required id="duration_from" name="duration_from" class="form-control" onkeydown="return false;" 
+                                onpaste="return false;" value="{{ work_experience_data.duration_from|date:'Y-m-d' }}">
+                            </div>
+            
+                            <div class="form-group">
+                                <label for="duration_to" class="form-label">Duration To:</label>
+                                <input type="date" required id="duration_to" name="duration_to" class="form-control" onkeydown="return false;" 
+                                onpaste="return false;" value="{{ work_experience_data.duration_to|date:'Y-m-d' }}">
+                            </div>
+            
+                            <!-- Designation Field -->
+                            <div class="form-group">
+                                <label for="designation" class="form-label">Designation:</label>
+                                <input type="text" required id="designation" name="designation" class="form-control" placeholder="Enter designation" oninput="validateDesignation(this)"
+                                value="{{ work_experience_data.designation }}">
+                            </div>
+            
+                            <!-- Annual Salary Field -->
+                            <div class="form-group">
+                                <label for="annual_salary" class="form-label">LPA:</label>
+                                <input type="number" required id="annual_salary" name="annual_salary" class="form-control" placeholder="Enter annual salary" min="1" max="10000000" step="0.1"
+                                value="{{ work_experience_data.annual_salary }}">
+                            </div>
+            
+                            <!-- Submit Button -->
+                        </div>
+                        <div class="submit-btn">
+                            <button type="submit" class="btn btn-continue">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- Bootstrap JS -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            
+            <script>
+                // Function to toggle the work experience section based on the answer
+                function toggleExperience(answer) {
+                    const workExperienceSection = document.getElementById('workExperience');
+                    workExperienceSection.style.display = (answer === 'yes') ? 'block' : 'none';
+                }
+            
+                // Function to validate the company name input
+                function validateInput(input) {
+                    const companyPattern = /^[a-zA-Z\s,.&]{3,}$/; // Allows only letters, spaces, commas, periods, and ampersands, at least 3 characters
+                    const maxConsecutiveWhitespaces = 3;
+                    const consecutiveWhitespacePattern = new RegExp(`\\s{${maxConsecutiveWhitespaces + 1},}`);
+                    
+                    if (consecutiveWhitespacePattern.test(input.value)) {
+                        input.setCustomValidity(`Company Name cannot contain more than ${maxConsecutiveWhitespaces} consecutive whitespace characters.`);
+                    } else if (!companyPattern.test(input.value)) {
+                        input.setCustomValidity("Company Name must be at least 3 characters long and can contain only letters, spaces, commas, periods, and ampersands. No numbers are allowed.");
+                    } else {
+                        input.setCustomValidity(""); // Clear the error if input is valid
+                    }
+            
+                    input.reportValidity();
+                }
+            
+                // Function to validate the designation input
+                function validateDesignation(input) {
+                    const designationPattern = /^[a-zA-Z\s,.&-]{3,}$/; // Allows letters, spaces, commas, periods, ampersands, and hyphens, at least 3 characters
+                    const maxConsecutiveWhitespaces = 3;
+                    const consecutiveWhitespacePattern = new RegExp(`\\s{${maxConsecutiveWhitespaces + 1},}`);
+                    
+                    if (consecutiveWhitespacePattern.test(input.value)) {
+                        input.setCustomValidity(`Designation cannot contain more than ${maxConsecutiveWhitespaces} consecutive whitespace characters.`);
+                    } else if (!designationPattern.test(input.value)) {
+                        input.setCustomValidity("Designation must be at least 3 characters long and can contain only letters, spaces, commas, periods, ampersands, and hyphens. No numbers are allowed.");
+                    } else {
+                        input.setCustomValidity(""); // Clear the error if input is valid
+                    }
+            
+                    input.reportValidity();
+                }
+            
+                // Function to validate the Annual Salary field
+                document.addEventListener('DOMContentLoaded', function() {
+                    document.getElementById('annual_salary').addEventListener('input', function() {
+                        const value = this.value;
+                        if (!/^\d+$/.test(value) && value !== '') {
+                            this.setCustomValidity("This field must contain only numbers.");
+                        } else {
+                            this.setCustomValidity("");
+                        }
+                    });
+                });
+                // Function to toggle the work experience section and required attributes based on the answer
+                function toggleExperience(answer) {
+                    const workExperienceSection = document.getElementById('workExperience');
+                    const formFields = workExperienceSection.querySelectorAll('input, select'); // Get all input and select elements inside the work experience section
+
+                    if (answer === 'yes') {
+                        // Show the work experience section and make all fields required
+                        workExperienceSection.style.display = 'block';
+                        formFields.forEach(field => field.setAttribute('required', true));
+                    } else {
+                        // Hide the work experience section and remove the required attribute from all fields
+                        workExperienceSection.style.display = 'none';
+                        formFields.forEach(field => field.removeAttribute('required'));
+                    }
+                }
+                
+            </script>
+            
+            
+</body>
+</html>
